@@ -16,6 +16,7 @@
 @interface ViewController ()
 
 @property (nonatomic, strong) NSLayoutConstraint *rightConstraint;
+@property (assign) CGFloat blueBoxWidth;
 
 @end
 
@@ -37,7 +38,7 @@
     c.backgroundColor = [UIColor redColor];
     [self.view addSubview:c];
     
-    CGFloat width = 200;
+    self.blueBoxWidth = 200;
     
     /*[LayoutConstraints]
      superview: self.view
@@ -45,7 +46,7 @@
      self.view.left == a.left
      a.top == 20 + self.view.top
      a.left == 10 + b.right * 1.1 @ 999 => self.rightConstraint
-     a.width == (width)
+     a.width == (self.blueBoxWidth)
      a.height >= 20
      
      b.top == a.top

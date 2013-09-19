@@ -28,6 +28,16 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3EFC97B217EA05FC00AFB5B2"
+               BuildableName = "constraintsparser Tests.xctest"
+               BlueprintName = "constraintsparser Tests"
+               ReferencedContainer = "container:constraintsparser.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

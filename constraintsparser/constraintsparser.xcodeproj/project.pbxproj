@@ -7,15 +7,51 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3EF5964517EAEB4E002C42A2 /* CommentReplacer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF5964417EAEB4E002C42A2 /* CommentReplacer.m */; };
+		3EF5964617EAEB4E002C42A2 /* CommentReplacer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF5964417EAEB4E002C42A2 /* CommentReplacer.m */; };
+		3EF5964817EAEC2A002C42A2 /* TestFile.mal in Resources */ = {isa = PBXBuildFile; fileRef = 3EF5964717EAEC2A002C42A2 /* TestFile.mal */; };
+		3EF5965617EAED9A002C42A2 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EF5965017EAED40002C42A2 /* OCMock.framework */; };
+		3EF5965A17EAEF16002C42A2 /* TestFile-output.mal in Resources */ = {isa = PBXBuildFile; fileRef = 3EF5965917EAEF16002C42A2 /* TestFile-output.mal */; };
 		3EFC97A217EA05D500AFB5B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EFC97A117EA05D500AFB5B2 /* Foundation.framework */; };
 		3EFC97A517EA05D500AFB5B2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC97A417EA05D500AFB5B2 /* main.m */; };
 		3EFC97A917EA05D500AFB5B2 /* constraintsparser.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EFC97A817EA05D500AFB5B2 /* constraintsparser.1 */; };
 		3EFC97B517EA05FC00AFB5B2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EFC97B417EA05FC00AFB5B2 /* XCTest.framework */; };
 		3EFC97BB17EA05FC00AFB5B2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC97B917EA05FC00AFB5B2 /* InfoPlist.strings */; };
-		3EFC97BD17EA05FC00AFB5B2 /* constraintsparser_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC97BC17EA05FC00AFB5B2 /* constraintsparser_Tests.m */; };
+		3EFC97BD17EA05FC00AFB5B2 /* CommentReplacerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC97BC17EA05FC00AFB5B2 /* CommentReplacerTests.m */; };
 		D25894E64BCD432F1715BCF7 /* AutoLayoutCommentProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = D25892C8F632016E5138522E /* AutoLayoutCommentProcessor.m */; };
 		D258991FB1BF210D5FF00169 /* ConstraintFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = D2589C92C1B754BF3F41BA92 /* ConstraintFormula.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3EF5964F17EAED40002C42A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EF5964917EAED40002C42A2 /* OCMock.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 030EF0A814632FD000B04273;
+			remoteInfo = OCMock;
+		};
+		3EF5965117EAED40002C42A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EF5964917EAED40002C42A2 /* OCMock.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 030EF0C014632FD000B04273;
+			remoteInfo = OCMockTests;
+		};
+		3EF5965317EAED40002C42A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EF5964917EAED40002C42A2 /* OCMock.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 030EF0DC14632FF700B04273;
+			remoteInfo = OCMockLib;
+		};
+		3EF5965717EAEDA7002C42A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EF5964917EAED40002C42A2 /* OCMock.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 030EF0A714632FD000B04273;
+			remoteInfo = OCMock;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		3EFC979C17EA05D500AFB5B2 /* CopyFiles */ = {
@@ -31,6 +67,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3EF5964317EAEB4E002C42A2 /* CommentReplacer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentReplacer.h; sourceTree = "<group>"; };
+		3EF5964417EAEB4E002C42A2 /* CommentReplacer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentReplacer.m; sourceTree = "<group>"; };
+		3EF5964717EAEC2A002C42A2 /* TestFile.mal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestFile.mal; sourceTree = "<group>"; };
+		3EF5964917EAED40002C42A2 /* OCMock.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCMock.xcodeproj; path = ocmock/Source/OCMock.xcodeproj; sourceTree = SOURCE_ROOT; };
+		3EF5965917EAEF16002C42A2 /* TestFile-output.mal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "TestFile-output.mal"; sourceTree = "<group>"; };
 		3EFC979E17EA05D500AFB5B2 /* constraintsparser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = constraintsparser; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EFC97A117EA05D500AFB5B2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3EFC97A417EA05D500AFB5B2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -40,7 +81,7 @@
 		3EFC97B417EA05FC00AFB5B2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		3EFC97B817EA05FC00AFB5B2 /* constraintsparser Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "constraintsparser Tests-Info.plist"; sourceTree = "<group>"; };
 		3EFC97BA17EA05FC00AFB5B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3EFC97BC17EA05FC00AFB5B2 /* constraintsparser_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = constraintsparser_Tests.m; sourceTree = "<group>"; };
+		3EFC97BC17EA05FC00AFB5B2 /* CommentReplacerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentReplacerTests.m; sourceTree = "<group>"; };
 		3EFC97BE17EA05FC00AFB5B2 /* constraintsparser Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "constraintsparser Tests-Prefix.pch"; sourceTree = "<group>"; };
 		D25892C8F632016E5138522E /* AutoLayoutCommentProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoLayoutCommentProcessor.m; sourceTree = "<group>"; };
 		D25899A78669FF84196407A7 /* AutoLayoutCommentProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoLayoutCommentProcessor.h; sourceTree = "<group>"; };
@@ -61,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EF5965617EAED9A002C42A2 /* OCMock.framework in Frameworks */,
 				3EFC97B517EA05FC00AFB5B2 /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -68,11 +110,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3EF5964A17EAED40002C42A2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3EF5965017EAED40002C42A2 /* OCMock.framework */,
+				3EF5965217EAED40002C42A2 /* OCMockTests.octest */,
+				3EF5965417EAED40002C42A2 /* libOCMock.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		3EFC979517EA05D500AFB5B2 = {
 			isa = PBXGroup;
 			children = (
 				3EFC97A317EA05D500AFB5B2 /* constraintsparser */,
 				3EFC97B617EA05FC00AFB5B2 /* constraintsparser Tests */,
+				3EF5964917EAED40002C42A2 /* OCMock.xcodeproj */,
 				3EFC97A017EA05D500AFB5B2 /* Frameworks */,
 				3EFC979F17EA05D500AFB5B2 /* Products */,
 			);
@@ -100,6 +153,8 @@
 			isa = PBXGroup;
 			children = (
 				3EFC97A417EA05D500AFB5B2 /* main.m */,
+				3EF5964317EAEB4E002C42A2 /* CommentReplacer.h */,
+				3EF5964417EAEB4E002C42A2 /* CommentReplacer.m */,
 				3EFC97A817EA05D500AFB5B2 /* constraintsparser.1 */,
 				3EFC97A617EA05D500AFB5B2 /* Supporting Files */,
 				D25899A78669FF84196407A7 /* AutoLayoutCommentProcessor.h */,
@@ -121,7 +176,9 @@
 		3EFC97B617EA05FC00AFB5B2 /* constraintsparser Tests */ = {
 			isa = PBXGroup;
 			children = (
-				3EFC97BC17EA05FC00AFB5B2 /* constraintsparser_Tests.m */,
+				3EFC97BC17EA05FC00AFB5B2 /* CommentReplacerTests.m */,
+				3EF5964717EAEC2A002C42A2 /* TestFile.mal */,
+				3EF5965917EAEF16002C42A2 /* TestFile-output.mal */,
 				3EFC97B717EA05FC00AFB5B2 /* Supporting Files */,
 			);
 			path = "constraintsparser Tests";
@@ -168,6 +225,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				3EF5965817EAEDA7002C42A2 /* PBXTargetDependency */,
 			);
 			name = "constraintsparser Tests";
 			productName = "constraintsparser Tests";
@@ -193,6 +251,12 @@
 			mainGroup = 3EFC979517EA05D500AFB5B2;
 			productRefGroup = 3EFC979F17EA05D500AFB5B2 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 3EF5964A17EAED40002C42A2 /* Products */;
+					ProjectRef = 3EF5964917EAED40002C42A2 /* OCMock.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3EFC979D17EA05D500AFB5B2 /* constraintsparser */,
@@ -201,11 +265,37 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		3EF5965017EAED40002C42A2 /* OCMock.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OCMock.framework;
+			remoteRef = 3EF5964F17EAED40002C42A2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3EF5965217EAED40002C42A2 /* OCMockTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = OCMockTests.octest;
+			remoteRef = 3EF5965117EAED40002C42A2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3EF5965417EAED40002C42A2 /* libOCMock.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libOCMock.a;
+			remoteRef = 3EF5965317EAED40002C42A2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		3EFC97B117EA05FC00AFB5B2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EF5964817EAEC2A002C42A2 /* TestFile.mal in Resources */,
+				3EF5965A17EAEF16002C42A2 /* TestFile-output.mal in Resources */,
 				3EFC97BB17EA05FC00AFB5B2 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EFC97A517EA05D500AFB5B2 /* main.m in Sources */,
+				3EF5964517EAEB4E002C42A2 /* CommentReplacer.m in Sources */,
 				D258991FB1BF210D5FF00169 /* ConstraintFormula.m in Sources */,
 				D25894E64BCD432F1715BCF7 /* AutoLayoutCommentProcessor.m in Sources */,
 			);
@@ -227,11 +318,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EFC97BD17EA05FC00AFB5B2 /* constraintsparser_Tests.m in Sources */,
+				3EFC97BD17EA05FC00AFB5B2 /* CommentReplacerTests.m in Sources */,
+				3EF5964617EAEB4E002C42A2 /* CommentReplacer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3EF5965817EAEDA7002C42A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OCMock;
+			targetProxy = 3EF5965717EAEDA7002C42A2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3EFC97B917EA05FC00AFB5B2 /* InfoPlist.strings */ = {
@@ -384,6 +484,7 @@
 				3EFC97AE17EA05D500AFB5B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3EFC97BF17EA05FC00AFB5B2 /* Build configuration list for PBXNativeTarget "constraintsparser Tests" */ = {
 			isa = XCConfigurationList;
@@ -392,6 +493,7 @@
 				3EFC97C117EA05FC00AFB5B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

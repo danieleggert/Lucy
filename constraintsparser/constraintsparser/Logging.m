@@ -20,6 +20,5 @@ void PrintToStdErr(NSString *format, ...)
         NSData *data = [output dataUsingEncoding:NSUTF8StringEncoding];
         [handle writeData:data];
         [handle writeData:[NSData dataWithBytes:(char const []){'\n'} length:1]];
-        [handle synchronizeFile];
     }
 }

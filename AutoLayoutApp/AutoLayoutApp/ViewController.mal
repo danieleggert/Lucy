@@ -27,20 +27,38 @@
 {
     [super viewDidLoad];
 	
-    UIView *a = [[UIView alloc] init];
+    UIView *a = [[UITextView alloc] init];
+    a.backgroundColor = [UIColor blueColor];
     [self.view addSubview:a];
     UIView *b = [[UIView alloc] init];
+    b.backgroundColor = [UIColor yellowColor];
     [self.view addSubview:b];
+    UIView *c = [[UIView alloc] init];
+    c.backgroundColor = [UIColor redColor];
+    [self.view addSubview:c];
     
     /*[LayoutConstraints]
      superview: self.view
      
-     a.left == 10 + b.right * 2 @ 999 => self.rightConstraint
+     self.view.left == a.left
+     a.top == 20 + self.view.top
+     a.left == 10 + b.right * 1.1 @ 999 => self.rightConstraint
      a.width == 200
-     b.height == 32
+     a.height >= 20
+     
+     b.top == a.top
+     b.left == 12 + a.right
+     b.width == 32
+     b.height == b.width
+     
+     c.width == b.width * 2
+     c.height == b.height * 2
+     c.left == 5 + a.right
+     c.top == a.bottom
      */
+    [a setContentCompressionResistancePriority:1000 forAxis:UILayoutConstraintAxisVertical];
     
-    NSLog(@"a");
+    NSLog(@"%@", self.rightConstraint);
 }
 
 - (void)didReceiveMemoryWarning

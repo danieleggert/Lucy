@@ -25,6 +25,7 @@
     [self.view addSubview:b];
     
     
+#line 29 "output.m"
 Replaced A
 Replaced B
 #line 31 "TestFile.mal"

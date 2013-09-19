@@ -36,7 +36,7 @@ static void MethodSwizzle(Class c, SEL origSEL, SEL overrideSEL);
     if (sourceCode == nil) {
         return description;
     }
-    return [description stringByAppendingFormat:@" \"%@\"", sourceCode];
+    return [description stringByAppendingFormat:@" '%@'", sourceCode];
 }
 
 @end

@@ -35,15 +35,16 @@
 - (void)testExample
 {
     NSURL *fileURL = [[NSBundle bundleForClass:[CommentReplacerTests class]] URLForResource:@"TestFile" withExtension:@"mal"];
+    NSURL *outputURL = [NSURL fileURLWithPath:@"foo/bar/output.m"];
     XCTAssertNotNil(fileURL, @"");
-    CommentReplacer *replacer = [CommentReplacer replacerForFileAtURL:fileURL];
+    CommentReplacer *replacer = [CommentReplacer replacerForFileAtURL:fileURL outputFileURL:outputURL];
     replacer.lineControlUsesFullPath = NO;
     XCTAssertNotNil(replacer, @"");
     
     OCMockObject *mock = [OCMockObject mockForProtocol:@protocol(CommentParser)];
     [[[mock expect] andReturn:@[
                                 @"Replaced A",
-                                @"Replaced B"]] processedLinesFromLines:@[
+                                @"Replaced B"]] processedLinesFromLines:@[@"",
                                                                           @"     a.left = b.right;",
                                                                           @"     a.width = 200;",
                                                                           @"     b.height = 32;",

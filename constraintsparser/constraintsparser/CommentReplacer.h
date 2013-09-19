@@ -16,9 +16,9 @@
 
 + (instancetype)replacerForFileAtURL:(NSURL *)fileURL;
 
-@property (readonly, nonatomic, copy) NSData *processedFileData;
-
 @property (nonatomic, strong) id<CommentParser> commentParser;
+@property (nonatomic) BOOL lineControlUsesFullPath;
+@property (readonly, nonatomic, copy) NSData *processedFileData;
 
 @end
 

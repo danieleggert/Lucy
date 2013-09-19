@@ -31,6 +31,7 @@
 + (instancetype)replacerForFileAtURL:(NSURL *)fileURL;
 {
     CommentReplacer *replacer = [[self alloc] init];
+    replacer.lineControlUsesFullPath = YES;
     replacer.fileURL = fileURL;
     return replacer;
 }
@@ -64,42 +65,57 @@
     NSMutableArray *commentLines = [NSMutableArray array];
     self.lineNumber = 0;
     
-    [lines addObject:[NSString stringWithFormat:@"// Layout constraints output for %@ generated at %@",
-                      self.fileName, [NSDate date]]];
-    [lines addObject:[self preprocessorCommentForCurrentLine]];
     BOOL needsToOutputLineNumber = YES;
-    NSUInteger startLine = NSNotFound;
+    NSUInteger startLine = 0;
+    
+    NSCharacterSet *newlineSet = [NSCharacterSet newlineCharacterSet];
     
     while (! [scanner isAtEnd]) {
         @autoreleasepool {
             NSString *line = nil;
-            [scanner scanUpToCharactersFromSet:[NSCharacterSet newlineCharacterSet] intoString:&line];
+            [scanner scanUpToCharactersFromSet:newlineSet intoString:&line];
             self.lineNumber++;
+            
             if (needsToOutputLineNumber) {
                 needsToOutputLineNumber = NO;
                 [lines addObject:[self preprocessorCommentForCurrentLine]];
             }
             
-            if (startLine == NSNotFound) {
+            if (startLine == 0) {
                 NSRange range = [line rangeOfString:self.startMarker options:0];
-                if (range.location != NSNotFound) {
+                if (range.length != 0) {
                     startLine = self.lineNumber;
                     if (0 < range.location) {
                         [lines addObject:[line substringToIndex:range.location]];
                     }
-                    [commentLines addObject:[line substringFromIndex:NSMaxRange(range)]];
+                    if (NSMaxRange(range) < [line length]) {
+                        [commentLines addObject:[line substringFromIndex:NSMaxRange(range)]];
+                    }
+                } else {
+                    [lines addObject:line];
                 }
             } else if (startLine != self.lineNumber) {
                 NSRange range = [line rangeOfString:self.endMarker options:0];
-                if (range.location != NSNotFound) {
+                if (range.length != 0) {
                     if (0 < range.location) {
                         [commentLines addObject:[line substringToIndex:range.location]];
                     }
                     [lines addObjectsFromArray:[self processCommentLines:commentLines]];
                     [commentLines removeAllObjects];
                     needsToOutputLineNumber = YES;
-                    startLine = NSNotFound;
+                    startLine = 0;
+                } else {
+                    [commentLines addObject:line];
                 }
+            }
+            // Do this little dance to make sure we add a line break at the end if the input file had one.
+            if ([scanner isAtEnd]) {
+                break;
+            }
+            [scanner scanCharactersFromSet:newlineSet intoString:NULL];
+            if ([scanner isAtEnd]) {
+                [lines addObject:@""];
+                break;
             }
         }
     }
@@ -119,9 +135,10 @@
 
 - (NSString *)preprocessorCommentForCurrentLine;
 {
-    return [NSString stringWithFormat:@"# %lu \"%@\"",
-            (unsigned long) self.lineNumber,
-            [self.fileURL path]];
+    NSString *fileName = (self.lineControlUsesFullPath ?
+                          [self.fileURL path] :
+                          [self.fileURL lastPathComponent]);
+    return [NSString stringWithFormat:@"#line %lu \"%@\"", (unsigned long) self.lineNumber, fileName];
 }
 
 - (NSString *)sourceCode;

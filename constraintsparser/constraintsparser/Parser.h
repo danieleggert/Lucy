@@ -10,9 +10,10 @@
 #import <AppKit/AppKit.h>
 
 @class Tokenizer;
+@class LayoutConstraint;
 
 @interface Parser : NSObject
 
-- (id)parse:(NSString*)string;
+- (LayoutConstraint*)parse:(NSString*)string;
 
 @end

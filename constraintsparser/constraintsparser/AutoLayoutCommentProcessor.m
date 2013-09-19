@@ -42,8 +42,6 @@ static NSString *const SuperViewPrefix = @"superview";
     [self.comment enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
         [self processLine:line];
     }];
-    NSLog(@"superview: %@", self.superviewIdentifier);
-    NSLog(@"formulas: %@", self.formulas);
     NSString *code = self.code;
     NSLog(@"%@", code);
     return code;

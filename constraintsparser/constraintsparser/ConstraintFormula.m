@@ -8,6 +8,8 @@
 #import "ConstraintFormula.h"
 #import "Parser.h"
 #import "LayoutConstraint.h"
+#import "Configuration.h"
+
 
 
 static int constraintCounter = 0;
@@ -60,7 +62,17 @@ static int constraintCounter = 0;
     if (self.targetIdentifier) {
         [lines addObject:[NSString stringWithFormat:@"%@ = %@;", self.targetIdentifier, constraintIdentifier]];
     }
+    if ([Configuration shouldAddDebugInfo]) {
+        [lines addObject:[self codeForAssociatingInputLineWithConstraintIdentifier:constraintIdentifier]];
+    }
     return [lines componentsJoinedByString:@"\n"];
+}
+
+- (NSString *)codeForAssociatingInputLineWithConstraintIdentifier:(NSString *)constraintIdentifier;
+{
+    NSString *code = self.line;
+    code = [code stringByReplacingOccurrencesOfString:@"\"" withString:@"'"];
+    return [NSString stringWithFormat:@"[%@ objcio_associateSourceCodeLine:@\"%@\"];", constraintIdentifier, code];
 }
 
 @end

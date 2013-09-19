@@ -8,9 +8,15 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+#import "NSLayoutConstraint+ObjcIO_Debug.h"
 
+
+
+
+@interface ViewController ()
 @end
+
+
 
 @implementation ViewController
 
@@ -24,9 +30,11 @@
     [self.view addSubview:b];
     
     /*[LayoutConstraints]
+     superview: self.view
+     
      a.left == 10 + b.right * 2 @ 999 => self.rightConstraint
-     a.width == 200;
-     b.height == 32;
+     a.width == 200
+     b.height == 32
      */
     
     NSLog(@"a");

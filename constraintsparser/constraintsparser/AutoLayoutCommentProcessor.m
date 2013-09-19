@@ -76,7 +76,7 @@ static NSString *const SuperViewPrefix = @"superview";
 
 - (void)addFormulaForLine:(NSString *)line error:(NSError **)error
 {
-    NSRegularExpression *expression = [NSRegularExpression regularExpressionWithPattern:@"^\\s*(.+)\\s*(?:=>\\s*(\\w+)\\s*)$" options:0 error:NULL];
+    NSRegularExpression *expression = [NSRegularExpression regularExpressionWithPattern:@"^\\s*(.+)\\s*(?:=>\\s*(\\w+)\\s*)?$" options:0 error:NULL];
     NSTextCheckingResult *result = [expression matchesInString:line options:0 range:NSMakeRange(0, line.length)].lastObject;
     NSString *formula = [line substringWithRange:[result rangeAtIndex:0]];
     NSString *targetIdentifier = result.numberOfRanges > 2 ? [line substringWithRange:[result rangeAtIndex:2]] : nil;

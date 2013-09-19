@@ -86,7 +86,7 @@
     secondItem = [self objcExpression:error];
     RETURN_NIL_IF_ERROR
 
-    secondAttribute = [self attributeWithError:&error ];
+    secondAttribute = [self attributeWithError:error ];
     RETURN_NIL_IF_ERROR
     if ([self.peek isEqual:@"*"]) {
         [self operator:@"*" error:error ];

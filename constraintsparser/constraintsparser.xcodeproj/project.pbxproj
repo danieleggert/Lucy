@@ -32,6 +32,7 @@
 		83996CF917EAF2640060CAD8 /* Tokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 83996CEB17EAF0F60060CAD8 /* Tokenizer.m */; };
 		83996CFA17EAF27B0060CAD8 /* LayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 83996CED17EAF0F60060CAD8 /* LayoutConstraint.m */; };
 		D25894E64BCD432F1715BCF7 /* AutoLayoutCommentProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = D25892C8F632016E5138522E /* AutoLayoutCommentProcessor.m */; };
+		D25896A65BF92F945545979B /* AutoLayoutCommentProcessorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D25897378716AAD624FCA165 /* AutoLayoutCommentProcessorTests.m */; };
 		D258991FB1BF210D5FF00169 /* ConstraintFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = D2589C92C1B754BF3F41BA92 /* ConstraintFormula.m */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +110,7 @@
 		83996CEE17EAF0F60060CAD8 /* LayoutConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayoutConstraint.h; sourceTree = "<group>"; };
 		83996CF617EAF1B40060CAD8 /* ParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParserTests.m; sourceTree = "<group>"; };
 		D25892C8F632016E5138522E /* AutoLayoutCommentProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoLayoutCommentProcessor.m; sourceTree = "<group>"; };
+		D25897378716AAD624FCA165 /* AutoLayoutCommentProcessorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoLayoutCommentProcessorTests.m; sourceTree = "<group>"; };
 		D25899A78669FF84196407A7 /* AutoLayoutCommentProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoLayoutCommentProcessor.h; sourceTree = "<group>"; };
 		D2589AB358D6581191AE03E6 /* ConstraintFormula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstraintFormula.h; sourceTree = "<group>"; };
 		D2589C92C1B754BF3F41BA92 /* ConstraintFormula.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstraintFormula.m; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				3EF5964717EAEC2A002C42A2 /* TestFile.mal */,
 				3EF5965917EAEF16002C42A2 /* TestFile-output.mal */,
 				3EFC97B717EA05FC00AFB5B2 /* Supporting Files */,
+				D25897378716AAD624FCA165 /* AutoLayoutCommentProcessorTests.m */,
 			);
 			path = "constraintsparser Tests";
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 				3EF5964617EAEB4E002C42A2 /* CommentReplacer.m in Sources */,
 				3EF596A517EB0047002C42A2 /* Logging.m in Sources */,
 				1778B1A417EAF6F800DE375B /* AutoLayoutCommentProcessor.m in Sources */,
+				D25896A65BF92F945545979B /* AutoLayoutCommentProcessorTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

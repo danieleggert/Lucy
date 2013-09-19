@@ -36,9 +36,7 @@
         "objcio__constraint1.priority = 1000;\n"
         "[self.view addConstraint:objcio__constraint1];\n"
         "self.constraint = objcio__constraint1;";
-    ConstraintFormula *formula = [[ConstraintFormula alloc] init];
-    formula.formula = formulaString;
-    formula.targetIdentifier = @"self.constraint";
+    ConstraintFormula *formula = [[ConstraintFormula alloc] initWithLine:formulaString];
     NSError *error;
     [formula parse:&error];
     XCTAssertNil(error, @"error");

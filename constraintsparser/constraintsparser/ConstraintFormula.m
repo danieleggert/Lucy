@@ -16,12 +16,11 @@ static int constraintCounter = 0;
 
 }
 
-- (instancetype)initWithTargetIdentifier:(NSString *)targetIdentifier formula:(NSString *)formula
+- (instancetype)initWithLine:(NSString *)line
 {
     self = [super init];
     if (self) {
-        self.formula = formula;
-        self.targetIdentifier = targetIdentifier;
+        self.line = line;
         self.priority = 1000;
         self.constant = 0;
         self.multiplier = 1;
@@ -33,7 +32,7 @@ static int constraintCounter = 0;
 {
     Parser* parser = [Parser new];
     NSError*parserError;
-    LayoutConstraint* constraint = [parser parse:self.formula error:&parserError];
+    LayoutConstraint* constraint = [parser parse:self.line error:&parserError];
     if (parserError) {
         *error = parserError;
     } else {

@@ -11,7 +11,7 @@
 @interface ConstraintFormula : NSObject
 
 @property (nonatomic, strong) NSString *targetIdentifier;
-@property (nonatomic, strong) NSString *formula;
+@property (nonatomic, strong) NSString *line;
 @property (nonatomic, strong) NSString *view1;
 @property (nonatomic, strong) NSString *view2;
 @property (nonatomic) NSInteger attribute1;
@@ -21,7 +21,7 @@
 @property (nonatomic) CGFloat multiplier;
 @property (nonatomic) CGFloat constant;
 
-- (instancetype)initWithTargetIdentifier:(NSString *)targetIdentifier formula:(NSString *)formula;
+- (instancetype)initWithLine:(NSString *)line;
 - (void)parse:(NSError **)error;
 - (NSString *)layoutConstraintCodeForSuperview:(NSString *)superview;
 

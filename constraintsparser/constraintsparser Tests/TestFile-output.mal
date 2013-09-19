@@ -1,12 +1,11 @@
+#line 1 "TestFile.mal"
 1
 2
 3
 4
-/*[LayoutConstraints]
-Original A
-Original B
-Original C
-*/
+Replaced A
+Replaced B
+#line 10 "TestFile.mal"
 5
 6
 7

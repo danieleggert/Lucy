@@ -34,10 +34,10 @@
 
 - (void)testExample
 {
-    return;
     NSURL *fileURL = [[NSBundle bundleForClass:[CommentReplacerTests class]] URLForResource:@"TestFile" withExtension:@"mal"];
     XCTAssertNotNil(fileURL, @"");
     CommentReplacer *replacer = [CommentReplacer replacerForFileAtURL:fileURL];
+    replacer.lineControlUsesFullPath = NO;
     XCTAssertNotNil(replacer, @"");
     
     OCMockObject *mock = [OCMockObject mockForProtocol:@protocol(CommentParser)];

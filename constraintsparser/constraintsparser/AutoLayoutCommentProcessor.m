@@ -71,13 +71,17 @@ static NSString *const SuperViewPrefix = @"superview";
 {
     NSMutableSet *viewIdentifiers = [NSMutableSet set];
     for (ConstraintFormula *formula in self.formulas) {
-        [viewIdentifiers addObject:formula.view1];
-        [viewIdentifiers addObject:formula.view2];
+        if (formula.view1 != nil) {
+            [viewIdentifiers addObject:formula.view1];
+        }
+        if (formula.view2 != nil) {
+            [viewIdentifiers addObject:formula.view2];
+        }
     }
     NSMutableArray *lines = [NSMutableArray array];
     for (NSString *viewIdentifier in viewIdentifiers) {
         if (!viewIdentifier.length) continue;
-        [lines addObject:[NSString stringWithFormat:@"%@.translatesAutoResizingMaskIntoConstraints = NO;", viewIdentifier]];
+        [lines addObject:[NSString stringWithFormat:@"%@.translatesAutoresizingMaskIntoConstraints = NO;", viewIdentifier]];
     }
     return lines;
 }

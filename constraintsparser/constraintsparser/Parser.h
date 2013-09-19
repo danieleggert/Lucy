@@ -18,4 +18,5 @@ static NSString* const errorDomain = @"io.objc";
 
 - (LayoutConstraint*)parse:(NSString*)string error:(NSError**)error;
 
+- (BOOL)isEOF;
 @end

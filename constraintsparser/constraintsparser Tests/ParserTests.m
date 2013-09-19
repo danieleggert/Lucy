@@ -58,6 +58,13 @@
     XCTAssertEqualObjects(result, expected, @"should be able to parse dot notation");
 }
 
+- (void)testWithoutAttribute
+{
+    id result = [self.parser parse:@"x.width == 200" error:NULL];
+    id expected = [LayoutConstraint constraintWithItem:@[@"x"] attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:200];
+    XCTAssertEqualObjects(result, expected, @"should be able to parse constant expressions");
+}
+
 - (void)testError {
     NSError* error;
     id result = [self.parser parse:@"test" error:&error];

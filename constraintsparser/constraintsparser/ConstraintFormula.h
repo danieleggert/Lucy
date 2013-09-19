@@ -16,9 +16,9 @@
 @property (nonatomic) NSInteger attribute1;
 @property (nonatomic) NSInteger attribute2;
 @property (nonatomic) NSInteger relation;
-@property (nonatomic) NSInteger priority;
-@property (nonatomic) CGFloat multiplier;
-@property (nonatomic) CGFloat constant;
+@property (nonatomic) id priority;
+@property (nonatomic) id multiplier;
+@property (nonatomic) id constant;
 
 - (instancetype)initWithLine:(NSString *)line;
 - (void)parse:(NSError **)error;

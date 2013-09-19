@@ -13,12 +13,12 @@
 @property (assign) NSLayoutRelation relation;
 @property (strong) NSArray* secondItem;
 @property (assign) NSLayoutAttribute secondAttribute;
-@property (assign) CGFloat multiplier;
-@property (assign) CGFloat constant;
+@property (assign) id multiplier;
+@property (assign) id constant;
 @property (strong) NSString* targetIdentifier;
-@property (assign) NSInteger priority;
+@property (assign) id priority;
 
-+ (instancetype)constraintWithItem:(id)firstItem attribute:(NSLayoutAttribute)firstAttribute relatedBy:(NSLayoutRelation)relation toItem:(id)secondItem attribute:(NSLayoutAttribute)secondAttribute multiplier:(CGFloat)multiplier constant:(CGFloat)constant targetIdentifier:(NSString*)targetIdentifier;
++ (instancetype)constraintWithItem:(id)firstItem attribute:(NSLayoutAttribute)firstAttribute relatedBy:(NSLayoutRelation)relation toItem:(id)secondItem attribute:(NSLayoutAttribute)secondAttribute multiplier:(id)multiplier constant:(id)constant targetIdentifier:(NSString*)targetIdentifier;
 
 - (BOOL)isEqualToConstraint:(LayoutConstraint*)constraint;
 

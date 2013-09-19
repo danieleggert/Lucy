@@ -23,9 +23,9 @@ static int constraintCounter = 0;
     self = [super init];
     if (self) {
         self.line = line;
-        self.priority = 1000;
-        self.constant = 0;
-        self.multiplier = 1;
+        self.priority = @1000;
+        self.constant = @0;
+        self.multiplier = @1;
         self.identifier = [NSString stringWithFormat:@"objcio__constraint%d", constraintCounter++];
     }
     return self;
@@ -56,11 +56,11 @@ static int constraintCounter = 0;
     NSString *attribute2 = [self attributeIdentifierForAttribute:self.attribute2];
     NSString *relation = [self relationIdentifierForRelation:self.relation];
     NSArray *lines = @[
-        [NSString stringWithFormat:@"NSLayoutConstraint *%@ = [NSLayoutConstraint constraintWithItem:%@ attribute:%@ relatedBy:%@ toItem:%@ attribute:%@ multiplier:%g constant:%g];",
+        [NSString stringWithFormat:@"NSLayoutConstraint *%@ = [NSLayoutConstraint constraintWithItem:%@ attribute:%@ relatedBy:%@ toItem:%@ attribute:%@ multiplier:%@ constant:%@];",
          self.identifier,
          (self.view1 == nil) ? @"nil" : self.view1, attribute1, relation,
          (self.view2 == nil) ? @"nil" : self.view2, attribute2, self.multiplier, self.constant],
-        [NSString stringWithFormat:@"%@.priority = %li;", self.identifier, self.priority],
+        [NSString stringWithFormat:@"%@.priority = %@;", self.identifier, self.priority],
     ];
     if (self.targetIdentifier) {
         lines = [lines arrayByAddingObject:[NSString stringWithFormat:@"%@ = %@;", self.targetIdentifier, self.identifier]];

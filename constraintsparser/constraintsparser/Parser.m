@@ -9,6 +9,7 @@
 #import "Parser.h"
 #import "Tokenizer.h"
 #import "LayoutConstraint.h"
+#import "Expression.h"
 
 #define RETURN_NIL_IF_ERROR if (error && *error) return nil;
 
@@ -77,10 +78,11 @@
 
     NSArray* secondItem = nil;
     NSLayoutAttribute secondAttribute = NSLayoutAttributeNotAnAttribute;
-    CGFloat constant = 0;
-    CGFloat multiplier = 1;
-    if ([self.peek isKindOfClass:[NSNumber class]]) {
-        constant = [self parseFloatWithError:error ];
+    id constant = @(0);
+    id multiplier = @(1);
+    id peek = self.peek;
+    if ([peek isKindOfClass:[NSNumber class]] || [peek isKindOfClass:[Expression class]]) {
+        constant = [self parseFloatOrVariableWithError:error];
         RETURN_NIL_IF_ERROR
         if (![self.peek isEqual:@"+"]) goto end;
         [self operator:@"+" error:error];
@@ -95,16 +97,16 @@
     if ([self.peek isEqual:@"*"]) {
         [self operator:@"*" error:error ];
         RETURN_NIL_IF_ERROR
-        multiplier = [self parseFloatWithError:NULL ];
+        multiplier = [self parseFloatOrVariableWithError:NULL ];
         RETURN_NIL_IF_ERROR
     }
 end: {
     LayoutConstraint* constraint = [LayoutConstraint constraintWithItem:firstItem attribute:firstAttribute relatedBy:relation toItem:secondItem attribute:secondAttribute multiplier:multiplier constant:constant targetIdentifier:nil];
     if ([self.peek isEqual:@"@"]) {
         [self operator:@"@" error:NULL];
-        CGFloat priority = [self parseFloatWithError:error];
+        id priority = [self parseFloatOrVariableWithError:error];
         RETURN_NIL_IF_ERROR
-        constraint.priority = (NSInteger)priority;
+        constraint.priority = priority;
     }
     if ([self.peek isEqual:@"=>"]) {
         [self operator:@"=>" error:NULL];
@@ -144,16 +146,37 @@ end: {
     return 0;
 }
 
-- (CGFloat)parseFloatWithError:(NSError**)error
+- (id)parseFloatOrVariableWithError:(NSError**)error
+{
+    id peek = self.peek;
+    if ([peek isKindOfClass:[NSNumber class]]) {
+        return [self parseFloatWithError:error];
+    } else {
+        return [self parseExpression:error];
+    }
+}
+
+- (id)parseExpression:(NSError**)error
+{
+    id peek = self.peek;
+    if ([peek isKindOfClass:[Expression class]]) {
+        self.cursor++;
+        return [peek expression];
+    }
+    *error = fail(@"Expected expression");
+    return nil;
+ }
+
+- (id)parseFloatWithError:(NSError**)error
 {
     id peek = self.peek;
     if ([peek isKindOfClass:[NSNumber class]]) {
         self.cursor++;
-        return [peek doubleValue];
+        return peek;
     }
     NSString* reason = [NSString stringWithFormat:@"Expected number, saw: %@", peek];
     *error = fail(reason);
-    return 0;
+    return nil;
 }
 
 - (NSLayoutAttribute)attributeWithError:(NSError**)error

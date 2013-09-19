@@ -3,6 +3,7 @@
 //
 
 #import "Tokenizer.h"
+#import "Expression.h"
 
 
 @interface Tokenizer ()
@@ -19,7 +20,7 @@
     self.scanner = [NSScanner scannerWithString:string];
     self.tokens = [NSMutableArray new];
     while (!self.scanner.isAtEnd) {
-        BOOL scanSucceeded = [self scanOperator] || [self scanNumber] || [self scanIdentifier];
+        BOOL scanSucceeded = [self scanOperator] || [self scanNumber] || [self scanIdentifier] || [self scanExpression];
         if (!scanSucceeded) {
             NSString* reason = [NSString stringWithFormat:@"Couldn't scan token: %@", [self.scanner.string substringFromIndex:self.scanner.scanLocation]];
             *error = fail(reason);
@@ -27,6 +28,21 @@
         }
     }
     return [self.tokens copy];
+}
+
+- (BOOL)scanExpression
+{
+    BOOL open = [self.scanner scanString:@"(" intoString:NULL];
+    if (!open) return NO;
+
+    NSString* result = nil;
+    open = [self.scanner scanUpToString:@")" intoString:&result];
+    if (open) {
+        [self.tokens addObject:[Expression expressionWithExpression:result]];
+        [self.scanner scanString:@")" intoString:NULL];
+        return YES;
+    }
+    return NO;
 }
 
 - (BOOL)scanOperator

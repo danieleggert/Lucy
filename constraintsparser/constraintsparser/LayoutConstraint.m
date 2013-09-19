@@ -6,7 +6,7 @@
 
 @implementation LayoutConstraint
 
-- (instancetype)initWithItem:(id)firstItem attribute:(NSLayoutAttribute)firstAttribute relatedBy:(NSLayoutRelation)relation toItem:(id)secondItem attribute:(NSLayoutAttribute)secondAttribute multiplier:(CGFloat)multiplier constant:(CGFloat)constant targetIdentifier:(NSString*)targetIdentifier
+- (instancetype)initWithItem:(id)firstItem attribute:(NSLayoutAttribute)firstAttribute relatedBy:(NSLayoutRelation)relation toItem:(id)secondItem attribute:(NSLayoutAttribute)secondAttribute multiplier:(id)multiplier constant:(id)constant targetIdentifier:(NSString*)targetIdentifier
 {
     self = [super init];
     if (self) {
@@ -18,13 +18,13 @@
         self.multiplier=multiplier;
         self.constant=constant;
         self.targetIdentifier=targetIdentifier;
-        self.priority = 1000; // default
+        self.priority = @1000; // default
     }
 
     return self;
 }
 
-+ (instancetype)constraintWithItem:(id)firstItem attribute:(NSLayoutAttribute)firstAttribute relatedBy:(NSLayoutRelation)relation toItem:(id)secondItem attribute:(NSLayoutAttribute)secondAttribute multiplier:(CGFloat)multiplier constant:(CGFloat)constant targetIdentifier:(NSString*)targetIdentifier
++ (instancetype)constraintWithItem:(id)firstItem attribute:(NSLayoutAttribute)firstAttribute relatedBy:(NSLayoutRelation)relation toItem:(id)secondItem attribute:(NSLayoutAttribute)secondAttribute multiplier:(id)multiplier constant:(id)constant targetIdentifier:(NSString*)targetIdentifier
 {
     return [[self alloc] initWithItem:firstItem attribute:firstAttribute relatedBy:relation toItem:secondItem attribute:secondAttribute multiplier:multiplier constant:constant targetIdentifier:targetIdentifier];
 }
@@ -64,16 +64,16 @@
     if (self.secondAttribute != constraint.secondAttribute) {
             return NO;
     }
-    if (self.multiplier != constraint.multiplier) {
+    if (self.multiplier != constraint.multiplier && ![self.multiplier isEqual:constraint.multiplier]) {
             return NO;
     }
-    if (self.constant != constraint.constant) {
+    if (self.constant != constraint.constant && ![self.constant isEqual:constraint.constant]) {
             return NO;
     }
     if (self.targetIdentifier != constraint.targetIdentifier && ![self.targetIdentifier isEqual:constraint.targetIdentifier]) {
         return NO;
     }
-    if (self.priority != constraint.priority) {
+    if (self.priority != constraint.priority && ![self.priority isEqual:constraint.priority]) {
         return NO;
     }
     return YES;
@@ -86,8 +86,10 @@
     hash = hash * 31u + self.relation;
     hash = hash * 31u + [self.secondItem hash];
     hash = hash * 31u + self.secondAttribute;
-    hash = hash * 31u + [[NSNumber numberWithDouble:self.multiplier] hash];
-    hash = hash * 31u + [[NSNumber numberWithDouble:self.constant] hash];
+    hash = hash * 31u + [self.multiplier hash];
+    hash = hash * 31u + [self.constant hash];
+    hash = hash * 31u + [self.priority hash];
+    hash = hash * 31u + [self.targetIdentifier hash];
     return hash;
 }
 
@@ -99,8 +101,10 @@
     [description appendFormat:@", relationWithError:=%li", self.relation];
     [description appendFormat:@", secondItem=%@", self.secondItem];
     [description appendFormat:@", secondAttribute=%li", self.secondAttribute];
-    [description appendFormat:@", multiplier=%f", self.multiplier];
-    [description appendFormat:@", constant=%f", self.constant];
+    [description appendFormat:@", multiplier=%@", self.multiplier];
+    [description appendFormat:@", constant=%@", self.constant];
+    [description appendFormat:@", priority=%@", self.priority];
+    [description appendFormat:@", targetIdentifier=%@", self.targetIdentifier];
     [description appendString:@">"];
     return description;
 }

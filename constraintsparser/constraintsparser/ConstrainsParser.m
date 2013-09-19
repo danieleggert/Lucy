@@ -8,8 +8,16 @@
 
 #import "ConstrainsParser.h"
 
+#import "Logging.h"
+#import "CommentReplacer.h"
+
+
 
 @interface ConstrainsParser ()
+
+@property (nonatomic, strong) NSURL *inputFileURL;
+@property (nonatomic, strong) NSURL *outputFileURL;
+
 @end
 
 
@@ -33,10 +41,57 @@
 
 - (void)parseCommandLineArguments;
 {
+    NSArray *arguments = [[NSProcessInfo processInfo] arguments];
+    NSUInteger const argc = [arguments count];
+    NSUInteger i = 1; // Skip command name
+    for ( ; i < argc; ++i) {
+        NSString *arg = arguments[i];
+        if ([arg hasPrefix:@"-"]) {
+            if ([arg isEqualToString:@"-o"]) {
+                ++i;
+                if (argc <= i) {
+                    PrintToStdErr(@"Missing argument for %@", arg);
+                    exit(-1);
+                } else {
+                    NSString *path = arguments[i];
+                    self.outputFileURL = [NSURL fileURLWithPath:path];
+                }
+            } else {
+                PrintToStdErr(@"Unknown argument %@", arg);
+                exit(-1);
+            }
+        } else {
+            if (self.inputFileURL != nil) {
+                PrintToStdErr(@"Unexpected argument %@", arg);
+                exit(-1);
+            } else {
+                self.inputFileURL = [NSURL fileURLWithPath:arg];
+            }
+        }
+    }
+    if (self.inputFileURL == nil) {
+        PrintToStdErr(@"No input file specified.");
+        exit(-1);
+    }
+    if (self.outputFileURL == nil) {
+        PrintToStdErr(@"No output file specified.");
+        exit(-1);
+    }
 }
 
 - (void)run;
 {
+    CommentReplacer *replacer = [CommentReplacer replacerForFileAtURL:self.inputFileURL];
+    NSData *outputData = [replacer processedFileData];
+    if (outputData == nil) {
+        PrintToStdErr(@"Unable to process file.");
+        exit(-1);
+    }
+    NSError *error = nil;
+    if (! [outputData writeToURL:self.outputFileURL options:0 error:&error]) {
+        PrintToStdErr(@"Unable to write output file: %@", error);
+        exit(-1);
+    }
 }
 
 @end

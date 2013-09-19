@@ -8,6 +8,10 @@
 
 #import "CommentReplacer.h"
 
+#import "Logging.h"
+
+
+
 //
 // We need to insert C preprocessor comments into the source code to enable debugging.
 // Source code lines look like this:
@@ -17,7 +21,7 @@
 //
 
 
-@interface CommentReplacer ()
+@interface CommentReplacer () <LineErrorHandler>
 
 @property (nonatomic, strong) NSURL *fileURL;
 @property (nonatomic) NSUInteger lineNumber;
@@ -151,8 +155,13 @@
 
 - (NSArray *)processCommentLines:(NSArray *)commentLines;
 {
-    NSArray *output = [self.commentParser processedLinesFromLines:commentLines];
+    NSArray *output = [self.commentParser processedLinesFromLines:commentLines errorHandler:self];
     return (output == nil) ? @[] : output;
+}
+
+- (void)logErrorString:(NSString *)errorString forLineAtIndex:(NSUInteger)relativeLineIndex;
+{
+    PrintToStdErr(@"%@:%lu: error: %@", [self.fileURL path], self.lineNumber + relativeLineIndex, errorString);
 }
 
 @end

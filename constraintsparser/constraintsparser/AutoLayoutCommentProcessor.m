@@ -78,8 +78,13 @@ static NSString *const SuperViewPrefix = @"superview";
     NSString *formula = [line substringWithRange:[result rangeAtIndex:0]];
     NSString *targetIdentifier = result.numberOfRanges > 2 ? [line substringWithRange:[result rangeAtIndex:2]] : nil;
     ConstraintFormula *constraintFormula = [[ConstraintFormula alloc] initWithTargetIdentifier:targetIdentifier formula:formula];
-    [constraintFormula parse];
-    [self.formulas addObject:constraintFormula];
+    NSError * error;
+    [constraintFormula parse:&error];
+    if (error) {
+        // error
+    } else {
+        [self.formulas addObject:constraintFormula];
+    }
 }
 
 - (void)setConfigurationValue:(NSString *)value forKey:(NSString *)key

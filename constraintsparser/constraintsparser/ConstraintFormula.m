@@ -29,13 +29,13 @@ static int constraintCounter = 0;
     return self;
 }
 
-- (void)parse
+- (void)parse:(NSError **)error
 {
     Parser* parser = [Parser new];
-    NSError* error ;
-    LayoutConstraint* constraint = [parser parse:self.formula error:&error ];
-    if (error) {
-        // TODO?
+    NSError*parserError;
+    LayoutConstraint* constraint = [parser parse:self.formula error:&parserError];
+    if (parserError) {
+        *error = parserError;
     } else {
         self.view1 = [constraint.firstItem componentsJoinedByString:@"."];
         self.view2 = [constraint.secondItem componentsJoinedByString:@"."];

@@ -22,7 +22,7 @@
 @property (nonatomic) CGFloat constant;
 
 - (instancetype)initWithTargetIdentifier:(NSString *)targetIdentifier formula:(NSString *)formula;
-- (void)parse;
+- (void)parse:(NSError **)error;
 - (NSString *)layoutConstraintCodeForSuperview:(NSString *)superview;
 
 @end

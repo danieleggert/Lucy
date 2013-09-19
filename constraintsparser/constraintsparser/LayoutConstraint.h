@@ -15,8 +15,9 @@
 @property (assign) NSLayoutAttribute secondAttribute;
 @property (assign) CGFloat multiplier;
 @property (assign) CGFloat constant;
+@property (strong) NSString* targetIdentifier;
 
-+ (instancetype)constraintWithItem:(id)firstItem attribute:(NSLayoutAttribute)firstAttribute relatedBy:(NSLayoutRelation)relation toItem:(id)secondItem attribute:(NSLayoutAttribute)secondAttribute multiplier:(CGFloat)multiplier constant:(CGFloat)constant;
++ (instancetype)constraintWithItem:(id)firstItem attribute:(NSLayoutAttribute)firstAttribute relatedBy:(NSLayoutRelation)relation toItem:(id)secondItem attribute:(NSLayoutAttribute)secondAttribute multiplier:(CGFloat)multiplier constant:(CGFloat)constant targetIdentifier:(NSString*)targetIdentifier;
 
 - (BOOL)isEqualToConstraint:(LayoutConstraint*)constraint;
 

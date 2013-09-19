@@ -74,10 +74,11 @@
     NSLayoutAttribute secondAttribute = NSLayoutAttributeNotAnAttribute;
     CGFloat constant = 0;
     CGFloat multiplier = 1;
+    NSString* targetIdentifier = nil;
     if ([self.peek isKindOfClass:[NSNumber class]]) {
         constant = [self parseFloatWithError:error ];
         RETURN_NIL_IF_ERROR
-        if (self.isEOF) goto end;
+        if (![self.peek isEqual:@"+"]) goto end;
         [self operator:@"+" error:error];
         RETURN_NIL_IF_ERROR
     }
@@ -93,8 +94,22 @@
         multiplier = [self parseFloatWithError:NULL ];
         RETURN_NIL_IF_ERROR
     }
-end:
-    return [LayoutConstraint constraintWithItem:firstItem attribute:firstAttribute relatedBy:relation toItem:secondItem attribute:secondAttribute multiplier:multiplier constant:constant];
+end:    
+    if ([self.peek isEqual:@"=>"]) {
+        [self operator:@"=>" error:NULL];
+        targetIdentifier = [self.restOfTokens componentsJoinedByString:@""];
+    }
+    {
+    LayoutConstraint* constraint = [LayoutConstraint constraintWithItem:firstItem attribute:firstAttribute relatedBy:relation toItem:secondItem attribute:secondAttribute multiplier:multiplier constant:constant targetIdentifier:targetIdentifier];
+    return constraint;
+    }
+}
+
+- (NSArray*)restOfTokens
+{
+    NSArray* result = [self.tokens subarrayWithRange:NSMakeRange(self.cursor, self.tokens.count-self.cursor)];
+    self.cursor = self.tokens.count;
+    return result;
 }
 
 - (BOOL)isEOF
@@ -106,8 +121,8 @@ end:
 {
     NSDictionary* relations = @{
        @"==": @(NSLayoutRelationEqual),
-            @">=": @(NSLayoutRelationGreaterThanOrEqual),
-            @"<=": @(NSLayoutRelationLessThanOrEqual)
+       @">=": @(NSLayoutRelationGreaterThanOrEqual),
+       @"<=": @(NSLayoutRelationLessThanOrEqual)
     };
     NSString* peek = [self peek];
     if ([relations.allKeys containsObject:peek]) {

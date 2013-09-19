@@ -41,6 +41,7 @@ static int constraintCounter = 0;
         self.multiplier = constraint.multiplier;
         self.constant = constraint.constant;
         self.priority = 1000; // todo
+        self.targetIdentifier = constraint.targetIdentifier;
     }
 }
 

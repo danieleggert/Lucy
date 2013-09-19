@@ -20,14 +20,14 @@
     self.tokens = [NSMutableArray new];
     while (!self.scanner.isAtEnd) {
         BOOL scanned = [self scanOperator] || [self scanNumber] || [self scanIdentifier];
-        NSAssert(scanned, @"Couldn't scan: %@", [self.scanner.string substringFromIndex:self.scanner.scanLocation]);
+        NSAssert(scanned, @"Couldn't scan token: %@", [self.scanner.string substringFromIndex:self.scanner.scanLocation]);
     }
     return [self.tokens copy];
 }
 
 - (BOOL)scanOperator
 {
-    NSArray* operators = @[@"==",@"<=",@">=",@".",@"*",@"+"];
+    NSArray* operators = @[@"==",@"<=",@">=",@"=>",@".",@"*",@"+"];
     for(NSString* operator in operators) {
         if([self.scanner scanString:operator intoString:NULL]) {
             [self.tokens addObject:operator];

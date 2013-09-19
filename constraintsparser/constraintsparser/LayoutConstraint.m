@@ -6,7 +6,7 @@
 
 @implementation LayoutConstraint
 
-- (instancetype)initWithItem:(id)firstItem attribute:(NSLayoutAttribute)firstAttribute relatedBy:(NSLayoutRelation)relation toItem:(id)secondItem attribute:(NSLayoutAttribute)secondAttribute multiplier:(CGFloat)multiplier constant:(CGFloat)constant
+- (instancetype)initWithItem:(id)firstItem attribute:(NSLayoutAttribute)firstAttribute relatedBy:(NSLayoutRelation)relation toItem:(id)secondItem attribute:(NSLayoutAttribute)secondAttribute multiplier:(CGFloat)multiplier constant:(CGFloat)constant targetIdentifier:(NSString*)targetIdentifier
 {
     self = [super init];
     if (self) {
@@ -17,14 +17,15 @@
         self.secondAttribute=secondAttribute;
         self.multiplier=multiplier;
         self.constant=constant;
+        self.targetIdentifier=targetIdentifier;
     }
 
     return self;
 }
 
-+ (instancetype)constraintWithItem:(id)firstItem attribute:(NSLayoutAttribute)firstAttribute relatedBy:(NSLayoutRelation)relation toItem:(id)secondItem attribute:(NSLayoutAttribute)secondAttribute multiplier:(CGFloat)multiplier constant:(CGFloat)constant
++ (instancetype)constraintWithItem:(id)firstItem attribute:(NSLayoutAttribute)firstAttribute relatedBy:(NSLayoutRelation)relation toItem:(id)secondItem attribute:(NSLayoutAttribute)secondAttribute multiplier:(CGFloat)multiplier constant:(CGFloat)constant targetIdentifier:(NSString*)targetIdentifier
 {
-    return [[self alloc] initWithItem:firstItem attribute:firstAttribute relatedBy:relation toItem:secondItem attribute:secondAttribute multiplier:multiplier constant:constant];
+    return [[self alloc] initWithItem:firstItem attribute:firstAttribute relatedBy:relation toItem:secondItem attribute:secondAttribute multiplier:multiplier constant:constant targetIdentifier:targetIdentifier];
 }
 
 - (BOOL)isEqual:(id)other
@@ -67,6 +68,9 @@
     }
     if (self.constant != constraint.constant) {
             return NO;
+    }
+    if (self.targetIdentifier != constraint.targetIdentifier && ![self.targetIdentifier isEqual:constraint.targetIdentifier]) {
+        return NO;
     }
     return YES;
 }

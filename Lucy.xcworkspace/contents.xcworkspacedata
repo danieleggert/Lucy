@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:AutoLayoutApp/AutoLayoutApp.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:constraintsparser/constraintsparser.xcodeproj">
    </FileRef>
 </Workspace>

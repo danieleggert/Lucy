@@ -76,7 +76,7 @@
     
     while (! [scanner isAtEnd]) {
         @autoreleasepool {
-            NSString *line = nil;
+            NSString *line = @"";
             [scanner scanUpToCharactersFromSet:newlineSet intoString:&line];
             self.lineNumber++;
             
@@ -116,7 +116,7 @@
             if ([scanner isAtEnd]) {
                 break;
             }
-            [scanner scanCharactersFromSet:newlineSet intoString:NULL];
+            [scanner scanString:@"\n" intoString:NULL];
             if ([scanner isAtEnd]) {
                 [lines addObject:@""];
                 break;

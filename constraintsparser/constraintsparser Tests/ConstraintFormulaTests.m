@@ -29,17 +29,18 @@
 
 - (void)testParseComment
 {
-    NSString *formulaString = @"self.one.two.baseline <= test.centerX * 2.3\n";
+    ConstraintFormula *formula = [[ConstraintFormula alloc] initWithLine:nil];
+    formula.view1 = @"self.one.two";
+    formula.view2 = @"test";
+    formula.relation = 0;
+    formula.attribute1 = 1;
+    formula.attribute2 = 1;
+    formula.multiplier = 2.3;
     NSString *expectedOutput = @"self.one.two.translatesAutoResizingMaskIntoConstraints = NO;\n"
         "test.translatesAutoResizingMaskIntoConstraints = NO;\n"
-        "NSLayoutConstraint *objcio__constraint1 = [NSLayoutConstraint constraintWithItem:self.one.two attribute:0 relatedBy:0 toItem:test attribute:0 multiplier:2.300000 constant:0.000000];\n"
+        "NSLayoutConstraint *objcio__constraint1 = [NSLayoutConstraint constraintWithItem:self.one.two attribute:1 relatedBy:0 toItem:test attribute:1 multiplier:2.300000 constant:0.000000];\n"
         "objcio__constraint1.priority = 1000;\n"
-        "[self.view addConstraint:objcio__constraint1];\n"
-        "self.constraint = objcio__constraint1;";
-    ConstraintFormula *formula = [[ConstraintFormula alloc] initWithLine:formulaString];
-    NSError *error;
-    [formula parse:&error];
-    XCTAssertNil(error, @"error");
+        "[self.view addConstraint:objcio__constraint1];";
     NSString *output = [formula layoutConstraintCodeForSuperview:@"self.view"];
     NSLog(@"%@", output);
     XCTAssert([output isEqualToString:expectedOutput], @"output does not match expected output");

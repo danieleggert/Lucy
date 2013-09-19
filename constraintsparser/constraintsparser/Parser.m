@@ -42,12 +42,19 @@
 }
 
 
-- (LayoutConstraint*)parse:(NSString*)string
+- (LayoutConstraint*)parse:(NSString*)string error:(NSError**)error
 {
     Tokenizer* tokenizer = [Tokenizer new];
     self.tokens = [tokenizer tokenize:string];
     self.cursor = 0;
-    return [self parseEquation];
+    @try {
+        return [self parseEquation];
+    } @catch (NSException* e) {
+        *error = [NSError errorWithDomain:@"io.objc" code:NSURLErrorUnknown userInfo:@{
+          NSLocalizedDescriptionKey: e.reason
+        }];
+        return nil;
+    }
 }
 
 - (LayoutConstraint*)parseEquation
@@ -85,8 +92,7 @@
         self.cursor++;
         return (NSLayoutRelation)[relations[peek] integerValue];
     }
-    NSAssert(NO,@"Expected layout attribute, saw: %@", peek);
-    return 0;
+    @throw [NSException exceptionWithName:@"expectedLayoutAttribute" reason:@"Expected layout attribute" userInfo:nil];
 }
 
 - (CGFloat)parseFloat
@@ -118,7 +124,8 @@
         self.cursor++;
         return;
     }
-    NSAssert(NO, @"Expected: %@, saw: %@", string, peek);
+    NSString* reason = [NSString stringWithFormat:@"Expected: %@, saw: %@", string, peek];
+    @throw [NSException exceptionWithName:@"expectedOperator" reason:reason userInfo:nil];
 }
 
 - (NSArray*)objcExpression
@@ -140,8 +147,8 @@
         self.cursor++;
         return peek;
     }
-    NSAssert(NO, @"Parse error: %lu - %@", self.cursor, self.tokens);
-    return nil;
+    NSString* reason = [NSString stringWithFormat: @"Parse error: %lu - %@", self.cursor, self.tokens];
+    @throw [NSException exceptionWithName:@"variableParseError" reason:reason userInfo:nil];
 }
 
 - (id)peek

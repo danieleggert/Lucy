@@ -32,12 +32,17 @@ static int constraintCounter = 0;
 - (void)parse
 {
     Parser* parser = [Parser new];
-    LayoutConstraint* constraint = [parser parse:self.formula];
-    self.view1 = [constraint.firstItem componentsJoinedByString:@"."];
-    self.view2 = [constraint.secondItem componentsJoinedByString:@"."];
-    self.multiplier = constraint.multiplier;
-    self.constant = constraint.constant;
-    self.priority = 1000; // todo
+    NSError* error ;
+    LayoutConstraint* constraint = [parser parse:self.formula error:&error ];
+    if (error) {
+        // TODO?
+    } else {
+        self.view1 = [constraint.firstItem componentsJoinedByString:@"."];
+        self.view2 = [constraint.secondItem componentsJoinedByString:@"."];
+        self.multiplier = constraint.multiplier;
+        self.constant = constraint.constant;
+        self.priority = 1000; // todo
+    }
 }
 
 - (NSString *)layoutConstraintCodeForSuperview:(NSString *)superview

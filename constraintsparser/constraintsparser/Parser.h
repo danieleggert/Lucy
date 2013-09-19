@@ -14,6 +14,6 @@
 
 @interface Parser : NSObject
 
-- (LayoutConstraint*)parse:(NSString*)string;
+- (LayoutConstraint*)parse:(NSString*)string error:(NSError**)error;
 
 @end

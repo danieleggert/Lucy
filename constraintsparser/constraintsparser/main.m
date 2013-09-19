@@ -8,15 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+#import "ConstrainsParser.h"
+
+
+
 int main(int argc, const char * argv[])
 {
-
     @autoreleasepool {
-        
-        // insert code here...
-        NSLog(@"Hello, World!");
-        
+        [ConstrainsParser run];
     }
     return 0;
 }
-

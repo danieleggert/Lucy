@@ -14,20 +14,24 @@
 @implementation Tokenizer
 
 
-- (NSArray*)tokenize:(NSString*)string
+- (NSArray*)tokenize:(NSString*)string error:(NSError**)error
 {
     self.scanner = [NSScanner scannerWithString:string];
     self.tokens = [NSMutableArray new];
     while (!self.scanner.isAtEnd) {
-        BOOL scanned = [self scanOperator] || [self scanNumber] || [self scanIdentifier];
-        NSAssert(scanned, @"Couldn't scan token: %@", [self.scanner.string substringFromIndex:self.scanner.scanLocation]);
+        BOOL scanSucceeded = [self scanOperator] || [self scanNumber] || [self scanIdentifier];
+        if (!scanSucceeded) {
+            NSString* reason = [NSString stringWithFormat:@"Couldn't scan token: %@", [self.scanner.string substringFromIndex:self.scanner.scanLocation]];
+            *error = fail(reason);
+            return nil;
+        }
     }
     return [self.tokens copy];
 }
 
 - (BOOL)scanOperator
 {
-    NSArray* operators = @[@"==",@"<=",@">=",@"=>",@".",@"*",@"+"];
+    NSArray* operators = @[@"==",@"<=",@">=",@"=>",@".",@"*",@"+",@"@"];
     for(NSString* operator in operators) {
         if([self.scanner scanString:operator intoString:NULL]) {
             [self.tokens addObject:operator];

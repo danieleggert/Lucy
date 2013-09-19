@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:NSLayoutConstraint+ObjcIO_Debug.h">
+   </FileRef>
+   <FileRef
+      location = "group:NSLayoutConstraint+ObjcIO_Debug.m">
+   </FileRef>
+   <FileRef
       location = "group:AutoLayoutApp/AutoLayoutApp.xcodeproj">
    </FileRef>
    <FileRef

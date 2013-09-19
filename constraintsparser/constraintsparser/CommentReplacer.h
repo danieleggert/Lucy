@@ -15,7 +15,7 @@
 
 @interface CommentReplacer : NSObject
 
-+ (instancetype)replacerForFileAtURL:(NSURL *)fileURL;
++ (instancetype)replacerForFileAtURL:(NSURL *)fileURL outputFileURL:(NSURL *)outputFileURL;
 
 @property (nonatomic, strong) id<CommentParser> commentParser;
 @property (nonatomic) BOOL lineControlUsesFullPath;

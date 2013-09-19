@@ -25,8 +25,10 @@
 @interface CommentReplacer () <LineErrorHandler>
 
 @property (nonatomic, strong) NSURL *fileURL;
+@property (nonatomic, strong) NSURL *outputFileURL;
 @property (nonatomic) NSUInteger lineNumber;
 @property (nonatomic) NSUInteger startLine;
+@property (nonatomic, strong) NSMutableArray *lines;
 
 @end
 
@@ -34,11 +36,12 @@
 
 @implementation CommentReplacer
 
-+ (instancetype)replacerForFileAtURL:(NSURL *)fileURL;
++ (instancetype)replacerForFileAtURL:(NSURL *)fileURL outputFileURL:(NSURL *)outputFileURL;
 {
     CommentReplacer *replacer = [[self alloc] init];
     replacer.lineControlUsesFullPath = YES;
     replacer.fileURL = fileURL;
+    replacer.outputFileURL = outputFileURL;
     replacer.commentParser = [[AutoLayoutCommentProcessor alloc] init];
     return replacer;
 }
@@ -68,7 +71,7 @@
     NSScanner *scanner = [NSScanner scannerWithString:sourceCode];
     scanner.charactersToBeSkipped = [NSCharacterSet illegalCharacterSet];
     
-    NSMutableArray *lines = [NSMutableArray array];
+    self.lines = [NSMutableArray array];
     NSMutableArray *commentLines = [NSMutableArray array];
     self.lineNumber = 0;
     
@@ -85,7 +88,7 @@
             
             if (needsToOutputLineNumber) {
                 needsToOutputLineNumber = NO;
-                [lines addObject:[self preprocessorCommentForCurrentLine]];
+                [self.lines addObject:[self preprocessorCommentForCurrentInputLine]];
             }
             
             if (self.startLine == 0) {
@@ -93,7 +96,7 @@
                 if (range.length != 0) {
                     self.startLine = self.lineNumber;
                     if (0 < range.location) {
-                        [lines addObject:[line substringToIndex:range.location]];
+                        [self.lines addObject:[line substringToIndex:range.location]];
                     }
                     if (NSMaxRange(range) < [line length]) {
                         [commentLines addObject:[line substringFromIndex:NSMaxRange(range)]];
@@ -101,7 +104,7 @@
                         [commentLines addObject:@""];
                     }
                 } else {
-                    [lines addObject:line];
+                    [self.lines addObject:line];
                 }
             } else if (self.startLine != self.lineNumber) {
                 NSRange range = [line rangeOfString:self.endMarker options:0];
@@ -109,7 +112,8 @@
                     if (0 < range.location) {
                         [commentLines addObject:[line substringToIndex:range.location]];
                     }
-                    [lines addObjectsFromArray:[self processCommentLines:commentLines]];
+                    [self addPreprocessorCommentForCurrentOutputLine];
+                    [self.lines addObjectsFromArray:[self processCommentLines:commentLines]];
                     [commentLines removeAllObjects];
                     needsToOutputLineNumber = YES;
                     self.startLine = 0;
@@ -123,13 +127,13 @@
             }
             [scanner scanString:@"\n" intoString:NULL];
             if ([scanner isAtEnd]) {
-                [lines addObject:@""];
+                [self.lines addObject:@""];
                 break;
             }
         }
     }
     
-    return [lines componentsJoinedByString:@"\n"];
+    return [self.lines componentsJoinedByString:@"\n"];
 }
                  
 - (NSString *)startMarker;
@@ -142,12 +146,22 @@
     return @"*/";
 }
 
-- (NSString *)preprocessorCommentForCurrentLine;
+- (NSString *)preprocessorCommentForCurrentInputLine;
 {
     NSString *fileName = (self.lineControlUsesFullPath ?
                           [self.fileURL path] :
                           [self.fileURL lastPathComponent]);
     return [NSString stringWithFormat:@"#line %lu \"%@\"", (unsigned long) self.lineNumber, fileName];
+}
+
+- (void)addPreprocessorCommentForCurrentOutputLine;
+{
+    NSString *fileName = (self.lineControlUsesFullPath ?
+                          [self.outputFileURL path] :
+                          [self.outputFileURL lastPathComponent]);
+    NSUInteger lineNumber = [self.lines count] + 2ULL;
+    NSString *line = [NSString stringWithFormat:@"#line %lu \"%@\"", (unsigned long) lineNumber, fileName];
+    [self.lines addObject:line];
 }
 
 - (NSString *)sourceCode;

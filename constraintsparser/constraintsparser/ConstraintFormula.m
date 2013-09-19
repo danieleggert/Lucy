@@ -8,6 +8,8 @@
 #import "ConstraintFormula.h"
 #import "Parser.h"
 #import "LayoutConstraint.h"
+#import "Configuration.h"
+
 
 
 static int constraintCounter = 0;
@@ -41,7 +43,7 @@ static int constraintCounter = 0;
         self.view2 = [constraint.secondItem componentsJoinedByString:@"."];
         self.multiplier = constraint.multiplier;
         self.constant = constraint.constant;
-        self.priority = 1000; // todo
+        self.priority = constraint.priority;
         self.targetIdentifier = constraint.targetIdentifier;
     }
 }
@@ -58,6 +60,9 @@ static int constraintCounter = 0;
     ];
     if (self.targetIdentifier) {
         lines = [lines arrayByAddingObject:[NSString stringWithFormat:@"%@ = %@;", self.targetIdentifier, self.identifier]];
+    }
+    if ([Configuration shouldAddDebugInfo]) {
+        lines = [lines arrayByAddingObject:[self codeForAssociatingInputLineWithConstraintIdentifier:self.identifier]];
     }
     return [lines componentsJoinedByString:@"\n"];
 }
@@ -121,6 +126,13 @@ static int constraintCounter = 0;
             break;
     }
     return attributeIdentifier;
+}
+
+- (NSString *)codeForAssociatingInputLineWithConstraintIdentifier:(NSString *)constraintIdentifier;
+{
+    NSString *code = self.line;
+    code = [code stringByReplacingOccurrencesOfString:@"\"" withString:@"'"];
+    return [NSString stringWithFormat:@"[%@ objcio_associateSourceCodeLine:@\"%@\"];", self.identifier, code];
 }
 
 @end

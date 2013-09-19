@@ -91,7 +91,7 @@
 
 - (void)run;
 {
-    CommentReplacer *replacer = [CommentReplacer replacerForFileAtURL:self.inputFileURL];
+    CommentReplacer *replacer = [CommentReplacer replacerForFileAtURL:self.inputFileURL outputFileURL:self.outputFileURL];
     NSData *outputData = [replacer processedFileData];
     if (outputData == nil) {
         PrintToStdErr(@"Unable to process file.");

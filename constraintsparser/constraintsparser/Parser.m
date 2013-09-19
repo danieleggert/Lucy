@@ -10,6 +10,8 @@
 #import "Tokenizer.h"
 #import "LayoutConstraint.h"
 
+#define RETURN_NIL_IF_ERROR if (error && *error) return nil;
+
 @interface Parser ()
 
 @property (nonatomic, strong) NSArray* tokens;
@@ -41,13 +43,17 @@
     return self;
 }
 
-#define fail(x) [NSError errorWithDomain:errorDomain code:NSURLErrorUnknown userInfo:@{NSLocalizedDescriptionKey : x}]
 
 - (LayoutConstraint*)parse:(NSString*)string error:(NSError**)error
 {
     NSError* theError;
     Tokenizer* tokenizer = [Tokenizer new];
-    self.tokens = [tokenizer tokenize:string];
+    self.tokens = [tokenizer tokenize:string error:error ];
+    RETURN_NIL_IF_ERROR
+    if (self.tokens.count == 0) {
+        *error = fail(@"No tokens");
+        return nil;
+    }
     self.cursor = 0;
     LayoutConstraint* constraint = [self parseEquation:&theError];
     if (theError) {
@@ -59,7 +65,6 @@
     return constraint;
 }
 
-#define RETURN_NIL_IF_ERROR if (error && *error) return nil;
 
 - (LayoutConstraint*)parseEquation:(NSError**)error
 {
@@ -74,7 +79,6 @@
     NSLayoutAttribute secondAttribute = NSLayoutAttributeNotAnAttribute;
     CGFloat constant = 0;
     CGFloat multiplier = 1;
-    NSString* targetIdentifier = nil;
     if ([self.peek isKindOfClass:[NSNumber class]]) {
         constant = [self parseFloatWithError:error ];
         RETURN_NIL_IF_ERROR
@@ -94,13 +98,19 @@
         multiplier = [self parseFloatWithError:NULL ];
         RETURN_NIL_IF_ERROR
     }
-end:    
+end: {
+    LayoutConstraint* constraint = [LayoutConstraint constraintWithItem:firstItem attribute:firstAttribute relatedBy:relation toItem:secondItem attribute:secondAttribute multiplier:multiplier constant:constant targetIdentifier:nil];
+    if ([self.peek isEqual:@"@"]) {
+        [self operator:@"@" error:NULL];
+        CGFloat priority = [self parseFloatWithError:error];
+        RETURN_NIL_IF_ERROR
+        constraint.priority = (NSInteger)priority;
+    }
     if ([self.peek isEqual:@"=>"]) {
         [self operator:@"=>" error:NULL];
-        targetIdentifier = [self.restOfTokens componentsJoinedByString:@""];
+        constraint.targetIdentifier = [self.restOfTokens componentsJoinedByString:@""];
     }
-    {
-    LayoutConstraint* constraint = [LayoutConstraint constraintWithItem:firstItem attribute:firstAttribute relatedBy:relation toItem:secondItem attribute:secondAttribute multiplier:multiplier constant:constant targetIdentifier:targetIdentifier];
+
     return constraint;
     }
 }

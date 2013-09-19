@@ -45,14 +45,17 @@
 
 - (LayoutConstraint*)parse:(NSString*)string error:(NSError**)error
 {
-    if (error) {
-        *error = nil;
-    }
+    NSError* theError;
     Tokenizer* tokenizer = [Tokenizer new];
     self.tokens = [tokenizer tokenize:string];
     self.cursor = 0;
-    LayoutConstraint* constraint = [self parseEquation:error];
-    if (error) return nil;
+    LayoutConstraint* constraint = [self parseEquation:&theError];
+    if (theError) {
+        if (error) {
+            *error = theError;
+        }
+        return nil;
+    }
     return constraint;
 }
 
@@ -67,27 +70,36 @@
     NSLayoutRelation relation = [self relationWithError:error ];
     RETURN_NIL_IF_ERROR
 
+    NSArray* secondItem = nil;
+    NSLayoutAttribute secondAttribute = NSLayoutAttributeNotAnAttribute;
     CGFloat constant = 0;
+    CGFloat multiplier = 1;
     if ([self.peek isKindOfClass:[NSNumber class]]) {
         constant = [self parseFloatWithError:error ];
         RETURN_NIL_IF_ERROR
+        if (self.isEOF) goto end;
         [self operator:@"+" error:error];
         RETURN_NIL_IF_ERROR
     }
 
-    NSArray* secondItem = [self objcExpression:error];
+    secondItem = [self objcExpression:error];
     RETURN_NIL_IF_ERROR
 
-    NSLayoutAttribute secondAttribute = [self attributeWithError:&error ];
+    secondAttribute = [self attributeWithError:&error ];
     RETURN_NIL_IF_ERROR
-    CGFloat multiplier = 1;
     if ([self.peek isEqual:@"*"]) {
         [self operator:@"*" error:error ];
         RETURN_NIL_IF_ERROR
         multiplier = [self parseFloatWithError:NULL ];
         RETURN_NIL_IF_ERROR
     }
+end:
     return [LayoutConstraint constraintWithItem:firstItem attribute:firstAttribute relatedBy:relation toItem:secondItem attribute:secondAttribute multiplier:multiplier constant:constant];
+}
+
+- (BOOL)isEOF
+{
+    return self.cursor == self.tokens.count;
 }
 
 - (NSLayoutRelation)relationWithError:(NSError**)error

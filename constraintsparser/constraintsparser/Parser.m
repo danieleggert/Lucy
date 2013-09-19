@@ -165,7 +165,7 @@
         self.cursor++;
         return peek;
     }
-    NSString* reason = [NSString stringWithFormat: @"Parse error: %lu - %@", self.cursor, self.tokens];
+    NSString* reason = [NSString stringWithFormat: @"Parse error: %lu - %@", self.cursor, [self.tokens componentsJoinedByString:@" "]];
     *error = fail(reason);
     return nil;
 }

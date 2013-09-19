@@ -18,6 +18,9 @@
 		3EFC97B517EA05FC00AFB5B2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EFC97B417EA05FC00AFB5B2 /* XCTest.framework */; };
 		3EFC97BB17EA05FC00AFB5B2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC97B917EA05FC00AFB5B2 /* InfoPlist.strings */; };
 		3EFC97BD17EA05FC00AFB5B2 /* CommentReplacerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC97BC17EA05FC00AFB5B2 /* CommentReplacerTests.m */; };
+		83996CEF17EAF0F60060CAD8 /* Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 83996CEA17EAF0F60060CAD8 /* Parser.m */; };
+		83996CF017EAF0F60060CAD8 /* Tokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 83996CEB17EAF0F60060CAD8 /* Tokenizer.m */; };
+		83996CF117EAF0F60060CAD8 /* LayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 83996CED17EAF0F60060CAD8 /* LayoutConstraint.m */; };
 		D25894E64BCD432F1715BCF7 /* AutoLayoutCommentProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = D25892C8F632016E5138522E /* AutoLayoutCommentProcessor.m */; };
 		D258991FB1BF210D5FF00169 /* ConstraintFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = D2589C92C1B754BF3F41BA92 /* ConstraintFormula.m */; };
 /* End PBXBuildFile section */
@@ -83,6 +86,12 @@
 		3EFC97BA17EA05FC00AFB5B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3EFC97BC17EA05FC00AFB5B2 /* CommentReplacerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentReplacerTests.m; sourceTree = "<group>"; };
 		3EFC97BE17EA05FC00AFB5B2 /* constraintsparser Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "constraintsparser Tests-Prefix.pch"; sourceTree = "<group>"; };
+		83996CE917EAF0F60060CAD8 /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parser.h; sourceTree = "<group>"; };
+		83996CEA17EAF0F60060CAD8 /* Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Parser.m; sourceTree = "<group>"; };
+		83996CEB17EAF0F60060CAD8 /* Tokenizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tokenizer.m; sourceTree = "<group>"; };
+		83996CEC17EAF0F60060CAD8 /* Tokenizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tokenizer.h; sourceTree = "<group>"; };
+		83996CED17EAF0F60060CAD8 /* LayoutConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutConstraint.m; sourceTree = "<group>"; };
+		83996CEE17EAF0F60060CAD8 /* LayoutConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayoutConstraint.h; sourceTree = "<group>"; };
 		D25892C8F632016E5138522E /* AutoLayoutCommentProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoLayoutCommentProcessor.m; sourceTree = "<group>"; };
 		D25899A78669FF84196407A7 /* AutoLayoutCommentProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoLayoutCommentProcessor.h; sourceTree = "<group>"; };
 		D2589AB358D6581191AE03E6 /* ConstraintFormula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstraintFormula.h; sourceTree = "<group>"; };
@@ -153,6 +162,12 @@
 			isa = PBXGroup;
 			children = (
 				3EFC97A417EA05D500AFB5B2 /* main.m */,
+				83996CE917EAF0F60060CAD8 /* Parser.h */,
+				83996CEA17EAF0F60060CAD8 /* Parser.m */,
+				83996CEB17EAF0F60060CAD8 /* Tokenizer.m */,
+				83996CEC17EAF0F60060CAD8 /* Tokenizer.h */,
+				83996CED17EAF0F60060CAD8 /* LayoutConstraint.m */,
+				83996CEE17EAF0F60060CAD8 /* LayoutConstraint.h */,
 				3EF5964317EAEB4E002C42A2 /* CommentReplacer.h */,
 				3EF5964417EAEB4E002C42A2 /* CommentReplacer.m */,
 				3EFC97A817EA05D500AFB5B2 /* constraintsparser.1 */,
@@ -310,7 +325,10 @@
 				3EFC97A517EA05D500AFB5B2 /* main.m in Sources */,
 				3EF5964517EAEB4E002C42A2 /* CommentReplacer.m in Sources */,
 				D258991FB1BF210D5FF00169 /* ConstraintFormula.m in Sources */,
+				83996CF017EAF0F60060CAD8 /* Tokenizer.m in Sources */,
 				D25894E64BCD432F1715BCF7 /* AutoLayoutCommentProcessor.m in Sources */,
+				83996CF117EAF0F60060CAD8 /* LayoutConstraint.m in Sources */,
+				83996CEF17EAF0F60060CAD8 /* Parser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +436,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "constraintsparser/constraintsparser-Prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -427,6 +446,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "constraintsparser/constraintsparser-Prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -445,6 +465,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "constraintsparser Tests/constraintsparser Tests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -460,6 +481,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "constraintsparser Tests/constraintsparser Tests-Prefix.pch";
 				INFOPLIST_FILE = "constraintsparser Tests/constraintsparser Tests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};

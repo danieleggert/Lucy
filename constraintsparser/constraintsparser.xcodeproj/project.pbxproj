@@ -347,13 +347,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
 				1778B1A017EAF25600DE375B /* AutoLayoutCommentProcessorTests.m in Sources */,
 				1778B1A317EAF6F500DE375B /* ConstraintFormula.m in Sources */,
-=======
 				83996CFA17EAF27B0060CAD8 /* LayoutConstraint.m in Sources */,
 				83996CF817EAF2600060CAD8 /* Parser.m in Sources */,
->>>>>>> 4c96a293e33f3b000239cc25ab99ae33981fcbad
 				3EFC97BD17EA05FC00AFB5B2 /* CommentReplacerTests.m in Sources */,
 				83996CF717EAF1B40060CAD8 /* ParserTests.m in Sources */,
 				83996CF917EAF2640060CAD8 /* Tokenizer.m in Sources */,

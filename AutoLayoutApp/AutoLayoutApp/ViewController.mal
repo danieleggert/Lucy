@@ -24,9 +24,9 @@
     [self.view addSubview:b];
     
     /*[LayoutConstraints]
-     a.left == b.right
-     a.width == 200
-     b.height == 32
+     a.left == 10 + b.right * 2 @ 999 => self.rightConstraint
+     a.width == 200;
+     b.height == 32;
      */
     
     NSLog(@"a");

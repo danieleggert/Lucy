@@ -22,7 +22,7 @@
         BOOL scanSucceeded = [self scanOperator] || [self scanNumber] || [self scanIdentifier];
         if (!scanSucceeded) {
             NSString* reason = [NSString stringWithFormat:@"Couldn't scan token: %@", [self.scanner.string substringFromIndex:self.scanner.scanLocation]];
-            fail(reason);
+            *error = fail(reason);
             return nil;
         }
     }
@@ -31,7 +31,7 @@
 
 - (BOOL)scanOperator
 {
-    NSArray* operators = @[@"==",@"<=",@">=",@"=>",@".",@"*",@"+"];
+    NSArray* operators = @[@"==",@"<=",@">=",@"=>",@".",@"*",@"+",@"@"];
     for(NSString* operator in operators) {
         if([self.scanner scanString:operator intoString:NULL]) {
             [self.tokens addObject:operator];

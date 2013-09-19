@@ -73,6 +73,16 @@
     XCTAssertEqualObjects(result, expected, @"Should be able to assign statements");
 }
 
+- (void)testPriority {
+    NSError* error;
+    id result = [self.parser parse:@"x.centerY == 200 @ 123 => self.centerConstraint" error:&error];
+    NSString* targetIdentifier = @"self.centerConstraint";
+    LayoutConstraint* expected = [LayoutConstraint constraintWithItem:@[@"x"] attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:200 targetIdentifier:targetIdentifier];
+    expected.priority = 123;
+
+    XCTAssertEqualObjects(result, expected, @"Should be able to assign statements");
+}
+
 - (void)testError {
     NSError* error;
     id result = [self.parser parse:@"test" error:&error];

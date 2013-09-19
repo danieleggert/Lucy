@@ -18,6 +18,7 @@
         self.multiplier=multiplier;
         self.constant=constant;
         self.targetIdentifier=targetIdentifier;
+        self.priority = 1000; // default
     }
 
     return self;
@@ -70,6 +71,9 @@
             return NO;
     }
     if (self.targetIdentifier != constraint.targetIdentifier && ![self.targetIdentifier isEqual:constraint.targetIdentifier]) {
+        return NO;
+    }
+    if (self.priority != constraint.priority) {
         return NO;
     }
     return YES;

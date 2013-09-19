@@ -12,6 +12,8 @@
 @class Tokenizer;
 @class LayoutConstraint;
 
+static NSString* const errorDomain = @"io.objc";
+
 @interface Parser : NSObject
 
 - (LayoutConstraint*)parse:(NSString*)string error:(NSError**)error;

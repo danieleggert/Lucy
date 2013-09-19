@@ -88,7 +88,7 @@
     NSMutableString* description = [NSMutableString stringWithFormat:@"<%@: ", NSStringFromClass([self class])];
     [description appendFormat:@"firstItem=%@", self.firstItem];
     [description appendFormat:@", firstAttribute=%li", self.firstAttribute];
-    [description appendFormat:@", relation=%li", self.relation];
+    [description appendFormat:@", relationWithError:=%li", self.relation];
     [description appendFormat:@", secondItem=%@", self.secondItem];
     [description appendFormat:@", secondAttribute=%li", self.secondAttribute];
     [description appendFormat:@", multiplier=%f", self.multiplier];

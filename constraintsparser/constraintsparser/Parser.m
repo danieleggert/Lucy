@@ -41,46 +41,56 @@
     return self;
 }
 
+#define fail(x) [NSError errorWithDomain:errorDomain code:NSURLErrorUnknown userInfo:@{NSLocalizedDescriptionKey : x}]
 
 - (LayoutConstraint*)parse:(NSString*)string error:(NSError**)error
 {
+    if (error) {
+        *error = nil;
+    }
     Tokenizer* tokenizer = [Tokenizer new];
     self.tokens = [tokenizer tokenize:string];
     self.cursor = 0;
-    @try {
-        return [self parseEquation];
-    } @catch (NSException* e) {
-        *error = [NSError errorWithDomain:@"io.objc" code:NSURLErrorUnknown userInfo:@{
-          NSLocalizedDescriptionKey: e.reason
-        }];
-        return nil;
-    }
+    LayoutConstraint* constraint = [self parseEquation:error];
+    if (error) return nil;
+    return constraint;
 }
 
-- (LayoutConstraint*)parseEquation
+#define RETURN_NIL_IF_ERROR if (error && *error) return nil;
+
+- (LayoutConstraint*)parseEquation:(NSError**)error
 {
-    NSArray* firstItem = [self objcExpression];
-    NSLayoutAttribute firstAttribute = [self attribute];
-    NSLayoutRelation relation = [self relation];
+    NSArray* firstItem = [self objcExpression:error];
+    RETURN_NIL_IF_ERROR
+    NSLayoutAttribute firstAttribute = [self attributeWithError:error];
+    RETURN_NIL_IF_ERROR
+    NSLayoutRelation relation = [self relationWithError:error ];
+    RETURN_NIL_IF_ERROR
 
     CGFloat constant = 0;
     if ([self.peek isKindOfClass:[NSNumber class]]) {
-        constant = [self parseFloat];
-        [self operator:@"+"];
+        constant = [self parseFloatWithError:error ];
+        RETURN_NIL_IF_ERROR
+        [self operator:@"+" error:error];
+        RETURN_NIL_IF_ERROR
     }
 
-    NSArray* secondItem = [self objcExpression];
+    NSArray* secondItem = [self objcExpression:error];
+    RETURN_NIL_IF_ERROR
 
-    NSLayoutAttribute secondAttribute = [self attribute];
+    NSLayoutAttribute secondAttribute = [self attributeWithError:&error ];
+    RETURN_NIL_IF_ERROR
     CGFloat multiplier = 1;
     if ([self.peek isEqual:@"*"]) {
-        [self operator:@"*"];
-        multiplier = [self parseFloat];
+        [self operator:@"*" error:error ];
+        RETURN_NIL_IF_ERROR
+        multiplier = [self parseFloatWithError:NULL ];
+        RETURN_NIL_IF_ERROR
     }
     return [LayoutConstraint constraintWithItem:firstItem attribute:firstAttribute relatedBy:relation toItem:secondItem attribute:secondAttribute multiplier:multiplier constant:constant];
 }
 
-- (NSLayoutRelation)relation
+- (NSLayoutRelation)relationWithError:(NSError**)error
 {
     NSDictionary* relations = @{
        @"==": @(NSLayoutRelationEqual),
@@ -92,32 +102,36 @@
         self.cursor++;
         return (NSLayoutRelation)[relations[peek] integerValue];
     }
-    @throw [NSException exceptionWithName:@"expectedLayoutAttribute" reason:@"Expected layout attribute" userInfo:nil];
+    NSString* reason = @"Expected relation";
+    *error = fail(reason);
+    return 0;
 }
 
-- (CGFloat)parseFloat
+- (CGFloat)parseFloatWithError:(NSError**)error
 {
     id peek = self.peek;
     if ([peek isKindOfClass:[NSNumber class]]) {
         self.cursor++;
         return [peek doubleValue];
     }
-    NSAssert(@NO, @"Expected number, saw: %@", peek);
+    NSString* reason = [NSString stringWithFormat:@"Expected number, saw: %@", peek];
+    *error = fail(reason);
     return 0;
 }
 
-- (NSLayoutAttribute)attribute
+- (NSLayoutAttribute)attributeWithError:(NSError**)error
 {
     NSString* peek = [self peek];
     if ([self.attributes.allKeys containsObject:peek]) {
         self.cursor++;
         return (NSLayoutAttribute)[self.attributes[peek] integerValue];
     }
-    NSAssert(NO,@"Expected layout attribute, saw: %@", peek);
+    NSString* reason = [NSString stringWithFormat:@"Expected layout attributeWithError:, saw: %@", peek];
+    *error = fail(reason);
     return 0;
 }
 
-- (void)operator:(NSString*)string
+- (void)operator:(NSString*)string error:(NSError**)error
 {
     NSString* peek = [self peek];
     if ([peek isEqual:string]) {
@@ -125,22 +139,26 @@
         return;
     }
     NSString* reason = [NSString stringWithFormat:@"Expected: %@, saw: %@", string, peek];
-    @throw [NSException exceptionWithName:@"expectedOperator" reason:reason userInfo:nil];
+    *error = fail(reason);
 }
 
-- (NSArray*)objcExpression
+- (NSArray*)objcExpression:(NSError**)error
 {
-    NSString* initial = [self variable];
-    [self operator:@"."];
+    NSString* initial = [self variable:error];
+    RETURN_NIL_IF_ERROR
+    [self operator:@"." error:error];
+    RETURN_NIL_IF_ERROR
     NSMutableArray* array = [NSMutableArray arrayWithObject:initial];
     while(![self.attributes.allKeys containsObject:self.peek]) {
-        [array addObject:[self variable]];
-        [self operator:@"."];
+        [array addObject:[self variable:error ]];
+        RETURN_NIL_IF_ERROR
+        [self operator:@"." error:error];
+        RETURN_NIL_IF_ERROR
     }
     return [array copy];
 }
 
-- (NSString*)variable
+- (NSString*)variable:(NSError**)error
 {
     id peek = [self peek];
     if ([peek isKindOfClass:[NSString class]]) {
@@ -148,7 +166,8 @@
         return peek;
     }
     NSString* reason = [NSString stringWithFormat: @"Parse error: %lu - %@", self.cursor, self.tokens];
-    @throw [NSException exceptionWithName:@"variableParseError" reason:reason userInfo:nil];
+    *error = fail(reason);
+    return nil;
 }
 
 - (id)peek

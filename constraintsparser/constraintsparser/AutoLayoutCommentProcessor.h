@@ -11,4 +11,5 @@
 
 @interface AutoLayoutCommentProcessor : NSObject <CommentParser>
 
+- (id)codeForAddingConstraintsToSuperview;
 @end

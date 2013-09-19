@@ -29,7 +29,7 @@ static NSString *const SuperViewPrefix = @"superview";
 {
     self = [super init];
     if (self) {
-        self.superviewIdentifier = nil;
+        self.superviewIdentifier = @"self.view";
         self.formulas = [NSMutableArray array];
     }
     return self;    
@@ -49,9 +49,36 @@ static NSString *const SuperViewPrefix = @"superview";
 {
     NSMutableArray *lines = [NSMutableArray array];
     for (ConstraintFormula *formula in self.formulas) {
-        [lines addObject:[formula layoutConstraintCodeForSuperview:self.superviewIdentifier]];
+        [lines addObject:[formula layoutConstraintCode]];
     }
+    [lines addObjectsFromArray:self.codeForDisablingTranslatesAutoResizingMask];
+    [lines addObject:self.codeForAddingConstraintsToSuperview];
     return [lines copy];
+}
+
+- (NSString *)codeForAddingConstraintsToSuperview
+{
+    NSMutableArray *constraintIdentifiers = [NSMutableArray array];
+    for (ConstraintFormula *formula in self.formulas) {
+        [constraintIdentifiers addObject:formula.identifier];
+    }
+    NSString *viewList = [constraintIdentifiers componentsJoinedByString:@", "];
+    return [NSString stringWithFormat:@"[%@ addConstraints:@[%@]];", self.superviewIdentifier, viewList];
+}
+
+- (NSArray *)codeForDisablingTranslatesAutoResizingMask
+{
+    NSMutableSet *viewIdentifiers = [NSMutableSet set];
+    for (ConstraintFormula *formula in self.formulas) {
+        [viewIdentifiers addObject:formula.view1];
+        [viewIdentifiers addObject:formula.view2];
+    }
+    NSMutableArray *lines = [NSMutableArray array];
+    for (NSString *viewIdentifier in viewIdentifiers) {
+        if (!viewIdentifier.length) continue;
+        [lines addObject:[NSString stringWithFormat:@"%@.translatesAutoResizingMaskIntoConstraints = NO;", viewIdentifier]];
+    }
+    return lines;
 }
 
 - (void)processLine:(NSString *)line index:(NSUInteger)idx

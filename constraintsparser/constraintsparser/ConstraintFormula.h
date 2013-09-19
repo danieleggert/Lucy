@@ -5,15 +5,14 @@
 //
 
 
-#import <Foundation/Foundation.h>
-
 
 @interface ConstraintFormula : NSObject
 
-@property (nonatomic, strong) NSString *targetIdentifier;
-@property (nonatomic, strong) NSString *line;
-@property (nonatomic, strong) NSString *view1;
-@property (nonatomic, strong) NSString *view2;
+@property (nonatomic, copy) NSString *identifier;
+@property (nonatomic, copy) NSString *targetIdentifier;
+@property (nonatomic, copy) NSString *line;
+@property (nonatomic, copy) NSString *view1;
+@property (nonatomic, copy) NSString *view2;
 @property (nonatomic) NSInteger attribute1;
 @property (nonatomic) NSInteger attribute2;
 @property (nonatomic) NSInteger relation;
@@ -23,6 +22,6 @@
 
 - (instancetype)initWithLine:(NSString *)line;
 - (void)parse:(NSError **)error;
-- (NSString *)layoutConstraintCodeForSuperview:(NSString *)superview;
+- (NSString *)layoutConstraintCode;
 
 @end

@@ -41,7 +41,7 @@
         "NSLayoutConstraint *objcio__constraint1 = [NSLayoutConstraint constraintWithItem:self.one.two attribute:1 relatedBy:0 toItem:test attribute:1 multiplier:2.300000 constant:0.000000];\n"
         "objcio__constraint1.priority = 1000;\n"
         "[self.view addConstraint:objcio__constraint1];";
-    NSString *output = [formula layoutConstraintCodeForSuperview:@"self.view"];
+    NSString *output = [formula layoutConstraintCode];
     NSLog(@"%@", output);
     XCTAssert([output isEqualToString:expectedOutput], @"output does not match expected output");
 }

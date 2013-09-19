@@ -24,6 +24,7 @@ static int constraintCounter = 0;
         self.priority = 1000;
         self.constant = 0;
         self.multiplier = 1;
+        self.identifier = [NSString stringWithFormat:@"objcio__constraint%d", constraintCounter++];
     }
     return self;
 }
@@ -45,22 +46,81 @@ static int constraintCounter = 0;
     }
 }
 
-- (NSString *)layoutConstraintCodeForSuperview:(NSString *)superview
+- (NSString *)layoutConstraintCode
 {
-    constraintCounter++;
-    NSString *constraintIdentifier = [NSString stringWithFormat:@"objcio__constraint%d", constraintCounter];
-    NSMutableArray *lines = [@[
-        [NSString stringWithFormat:@"%@.translatesAutoResizingMaskIntoConstraints = NO;", self.view1],
-        [NSString stringWithFormat:@"%@.translatesAutoResizingMaskIntoConstraints = NO;", self.view2],
-        [NSString stringWithFormat:@"NSLayoutConstraint *%@ = [NSLayoutConstraint "
-                                       "constraintWithItem:%@ attribute:%li relatedBy:%li toItem:%@ attribute:%li multiplier:%f constant:%f];", constraintIdentifier, self.view1, self.attribute1, self.relation, self.view2, self.attribute2, self.multiplier, self.constant],
-        [NSString stringWithFormat:@"%@.priority = %li;", constraintIdentifier, self.priority],
-        [NSString stringWithFormat:@"[%@ addConstraint:%@];", superview, constraintIdentifier],
-    ] mutableCopy];
+    NSString *attribute1 = [self attributeIdentifierForAttribute:self.attribute1];
+    NSString *attribute2 = [self attributeIdentifierForAttribute:self.attribute2];
+    NSString *relation = [self relationIdentifierForRelation:self.relation];
+    NSArray *lines = @[
+        [NSString stringWithFormat:@"NSLayoutConstraint *%@ = [NSLayoutConstraint constraintWithItem:%@ attribute:%@ relatedBy:%@ toItem:%@ attribute:%@ multiplier:%g constant:%g];",
+                                   self.identifier, self.view1, attribute1, relation, self.view2, attribute2, self.multiplier, self.constant],
+        [NSString stringWithFormat:@"%@.priority = %li;", self.identifier, self.priority],
+    ];
     if (self.targetIdentifier) {
-        [lines addObject:[NSString stringWithFormat:@"%@ = %@;", self.targetIdentifier, constraintIdentifier]];
+        lines = [lines arrayByAddingObject:[NSString stringWithFormat:@"%@ = %@;", self.targetIdentifier, self.identifier]];
     }
     return [lines componentsJoinedByString:@"\n"];
+}
+
+- (NSString *)relationIdentifierForRelation:(NSLayoutRelation)relation
+{
+    NSString *relationIdentifier = @"";
+    switch (relation) {
+        case NSLayoutRelationGreaterThanOrEqual:
+            relationIdentifier = @"NSLayoutRelationGreaterThanOrEqual";
+            break;
+        case NSLayoutRelationLessThanOrEqual:
+            relationIdentifier = @"NSLayoutRelationLessThanOrEqual";
+            break;
+        case NSLayoutRelationEqual:
+            relationIdentifier = @"NSLayoutRelationEqual";
+            break;
+    }
+    return relationIdentifier;
+}
+
+- (NSString *)attributeIdentifierForAttribute:(NSLayoutAttribute)attribute
+{
+    NSString *attributeIdentifier = @"";
+    switch (attribute) {
+        case NSLayoutAttributeCenterX:
+            attributeIdentifier = @"NSLayoutAttributeCenterX";
+            break;
+        case NSLayoutAttributeHeight:
+            attributeIdentifier = @"NSLayoutAttributeHeight";
+            break;
+        case NSLayoutAttributeTop:
+            attributeIdentifier = @"NSLayoutAttributeTop";
+            break;
+        case NSLayoutAttributeBaseline:
+            attributeIdentifier = @"NSLayoutAttributeBaseline";
+            break;
+        case NSLayoutAttributeBottom:
+            attributeIdentifier = @"NSLayoutAttributeBottom";
+            break;
+        case NSLayoutAttributeCenterY:
+            attributeIdentifier = @"NSLayoutAttributeCenterY";
+            break;
+        case NSLayoutAttributeLeading:
+            attributeIdentifier = @"NSLayoutAttributeLeading";
+            break;
+        case NSLayoutAttributeLeft:
+            attributeIdentifier = @"NSLayoutAttributeLeft";
+            break;
+        case NSLayoutAttributeNotAnAttribute:
+            attributeIdentifier = @"NSLayoutAttributeNotAnAttribute";
+            break;
+        case NSLayoutAttributeRight:
+            attributeIdentifier = @"NSLayoutAttributeRight";
+            break;
+        case NSLayoutAttributeTrailing:
+            attributeIdentifier = @"NSLayoutAttributeTrailing";
+            break;
+        case NSLayoutAttributeWidth:
+            attributeIdentifier = @"NSLayoutAttributeWidth";
+            break;
+    }
+    return attributeIdentifier;
 }
 
 @end

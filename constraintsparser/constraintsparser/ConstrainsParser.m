@@ -77,6 +77,16 @@
         PrintToStdErr(@"No output file specified.");
         exit(-1);
     }
+    
+    NSURL *outputDirectory = [self.outputFileURL URLByDeletingLastPathComponent];
+    NSFileManager *fm = [NSFileManager defaultManager];
+    if (! [fm fileExistsAtPath:[outputDirectory path]]) {
+        NSError *error = nil;
+        if (! [fm createDirectoryAtURL:outputDirectory withIntermediateDirectories:YES attributes:nil error:&error]) {
+            PrintToStdErr(@"Unable to create output directory \"%@\": %@", [outputDirectory path], error);
+            exit(-1);
+        }
+    }
 }
 
 - (void)run;

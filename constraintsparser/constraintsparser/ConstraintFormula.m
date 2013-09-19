@@ -41,6 +41,8 @@ static int constraintCounter = 0;
     } else {
         self.view1 = [constraint.firstItem componentsJoinedByString:@"."];
         self.view2 = [constraint.secondItem componentsJoinedByString:@"."];
+        self.attribute1 = constraint.firstAttribute;
+        self.attribute2 = constraint.secondAttribute;
         self.multiplier = constraint.multiplier;
         self.constant = constraint.constant;
         self.priority = constraint.priority;

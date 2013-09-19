@@ -13,6 +13,8 @@
 		3EFC97B517EA05FC00AFB5B2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EFC97B417EA05FC00AFB5B2 /* XCTest.framework */; };
 		3EFC97BB17EA05FC00AFB5B2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC97B917EA05FC00AFB5B2 /* InfoPlist.strings */; };
 		3EFC97BD17EA05FC00AFB5B2 /* constraintsparser_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC97BC17EA05FC00AFB5B2 /* constraintsparser_Tests.m */; };
+		D25894E64BCD432F1715BCF7 /* AutoLayoutCommentProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = D25892C8F632016E5138522E /* AutoLayoutCommentProcessor.m */; };
+		D258991FB1BF210D5FF00169 /* ConstraintFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = D2589C92C1B754BF3F41BA92 /* ConstraintFormula.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +42,10 @@
 		3EFC97BA17EA05FC00AFB5B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3EFC97BC17EA05FC00AFB5B2 /* constraintsparser_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = constraintsparser_Tests.m; sourceTree = "<group>"; };
 		3EFC97BE17EA05FC00AFB5B2 /* constraintsparser Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "constraintsparser Tests-Prefix.pch"; sourceTree = "<group>"; };
+		D25892C8F632016E5138522E /* AutoLayoutCommentProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoLayoutCommentProcessor.m; sourceTree = "<group>"; };
+		D25899A78669FF84196407A7 /* AutoLayoutCommentProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoLayoutCommentProcessor.h; sourceTree = "<group>"; };
+		D2589AB358D6581191AE03E6 /* ConstraintFormula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstraintFormula.h; sourceTree = "<group>"; };
+		D2589C92C1B754BF3F41BA92 /* ConstraintFormula.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstraintFormula.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +102,10 @@
 				3EFC97A417EA05D500AFB5B2 /* main.m */,
 				3EFC97A817EA05D500AFB5B2 /* constraintsparser.1 */,
 				3EFC97A617EA05D500AFB5B2 /* Supporting Files */,
+				D25899A78669FF84196407A7 /* AutoLayoutCommentProcessor.h */,
+				D2589AB358D6581191AE03E6 /* ConstraintFormula.h */,
+				D2589C92C1B754BF3F41BA92 /* ConstraintFormula.m */,
+				D25892C8F632016E5138522E /* AutoLayoutCommentProcessor.m */,
 			);
 			path = constraintsparser;
 			sourceTree = "<group>";
@@ -208,6 +218,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EFC97A517EA05D500AFB5B2 /* main.m in Sources */,
+				D258991FB1BF210D5FF00169 /* ConstraintFormula.m in Sources */,
+				D25894E64BCD432F1715BCF7 /* AutoLayoutCommentProcessor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

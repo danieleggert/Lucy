@@ -22,6 +22,8 @@
 		3EF596E017EB0159002C42A2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3EF596DE17EB0159002C42A2 /* InfoPlist.strings */; };
 		3EF596E217EB0159002C42A2 /* AutoLayoutAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF596E117EB0159002C42A2 /* AutoLayoutAppTests.m */; };
 		3EF596EC17EB037F002C42A2 /* ViewController.mal in Sources */ = {isa = PBXBuildFile; fileRef = 3EF596CC17EB0159002C42A2 /* ViewController.mal */; };
+		5A416BFF35C664EB80E1CF5D /* DemoViewController.mal in Sources */ = {isa = PBXBuildFile; fileRef = 5A416E5B13A4FF0608830AAF /* DemoViewController.mal */; };
+		8344F4CD17EB5AC1009EA9D7 /* DemoWithLotsOfCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344F4CC17EB5AC1009EA9D7 /* DemoWithLotsOfCodeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -70,6 +72,10 @@
 		3EF596DD17EB0159002C42A2 /* AutoLayoutAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AutoLayoutAppTests-Info.plist"; sourceTree = "<group>"; };
 		3EF596DF17EB0159002C42A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3EF596E117EB0159002C42A2 /* AutoLayoutAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoLayoutAppTests.m; sourceTree = "<group>"; };
+		5A4166AF68719E7D5F12753C /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
+		5A416E5B13A4FF0608830AAF /* DemoViewController.mal */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = DemoViewController.mal; sourceTree = "<group>"; };
+		8344F4CB17EB5AC1009EA9D7 /* DemoWithLotsOfCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoWithLotsOfCodeViewController.h; sourceTree = "<group>"; };
+		8344F4CC17EB5AC1009EA9D7 /* DemoWithLotsOfCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoWithLotsOfCodeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +144,10 @@
 				3E98965117EB3B98007065BD /* NSLayoutConstraint+ObjcIO_Debug.m */,
 				3EF596CE17EB0159002C42A2 /* Images.xcassets */,
 				3EF596BD17EB0159002C42A2 /* Supporting Files */,
+				5A416E5B13A4FF0608830AAF /* DemoViewController.mal */,
+				5A4166AF68719E7D5F12753C /* DemoViewController.h */,
+				8344F4CB17EB5AC1009EA9D7 /* DemoWithLotsOfCodeViewController.h */,
+				8344F4CC17EB5AC1009EA9D7 /* DemoWithLotsOfCodeViewController.m */,
 			);
 			path = AutoLayoutApp;
 			sourceTree = "<group>";
@@ -220,7 +230,7 @@
 				ORGANIZATIONNAME = objc.io;
 				TargetAttributes = {
 					3EF596D317EB0159002C42A2 = {
-						TestTargetID = 3EF596B217EB0159002C42A2 /* AutoLayoutApp */;
+						TestTargetID = 3EF596B217EB0159002C42A2;
 					};
 				};
 			};
@@ -273,6 +283,8 @@
 				3E98965217EB3B98007065BD /* NSLayoutConstraint+ObjcIO_Debug.m in Sources */,
 				3EF596C317EB0159002C42A2 /* main.m in Sources */,
 				3EF596EC17EB037F002C42A2 /* ViewController.mal in Sources */,
+				5A416BFF35C664EB80E1CF5D /* DemoViewController.mal in Sources */,
+				8344F4CD17EB5AC1009EA9D7 /* DemoWithLotsOfCodeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

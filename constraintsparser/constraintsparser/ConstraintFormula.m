@@ -46,6 +46,7 @@ static int constraintCounter = 0;
         self.multiplier = constraint.multiplier;
         self.constant = constraint.constant;
         self.priority = constraint.priority;
+        self.relation = constraint.relation;
         self.targetIdentifier = constraint.targetIdentifier;
     }
 }

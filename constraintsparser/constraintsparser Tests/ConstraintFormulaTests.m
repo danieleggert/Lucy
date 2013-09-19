@@ -92,6 +92,19 @@
                    priority:500];
 }
 
+- (void)testGreaterThanOrEqual
+{
+    [self testFormulaString:@"self.view.subview.left >= self.view.subview2.left"
+                    forItem:@"self.view.subview"
+                  attribute:@"NSLayoutAttributeLeft"
+                   relation:@"NSLayoutRelationGreaterThanOrEqual"
+                       item:@"self.view.subview2"
+                  attribute:@"NSLayoutAttributeLeft"
+                 multiplier:1
+                   constant:0
+                   priority:1000];
+}
+
 - (void)testFormulaString:(NSString *)formulaString forItem:(NSString *)item1 attribute:(NSString *)attribute1 relation:(NSString *)relation item:(NSString *)item2 attribute:(NSString *)attribute2 multiplier:(CGFloat)multiplier constant:(CGFloat)constant priority:(NSInteger)priority
 {
     ConstraintFormula *formula = [[ConstraintFormula alloc] initWithLine:formulaString];

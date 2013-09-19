@@ -8,7 +8,6 @@
 
 #import <XCTest/XCTest.h>
 #import "AutoLayoutCommentProcessor.h"
-#import <Foundation/Foundation.h>
 
 @interface AutoLayoutCommentProcessorTests : XCTestCase
 
@@ -32,13 +31,13 @@
 {
     NSString *comment = @"superview: self.view\n"
     "\n"
-    "a.left = b.right => self.constraint1\n"
-    "a.top = 2 * b.bottom + constant @501 => self.constraint2";
-    
-    AutoLayoutCommentProcessor *processor = [[AutoLayoutCommentProcessor alloc] initWithComment:comment];
-    NSString *output = [processor process];
-    NSArray *lines = [output componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-    XCTAssert(lines.count > 0);
+    "self.one.two.baseline <= test.centerX * 2.3\n"
+    "self.one.two.top <= test.bottom => self.constraint2";
+    NSArray *commentLines = [comment componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+
+    AutoLayoutCommentProcessor *processor = [[AutoLayoutCommentProcessor alloc] init];
+    NSArray *output = [processor processedLinesFromLines:commentLines errorHandler:nil];
+    XCTAssert(output.count > 0);
 }
 
 @end

@@ -5,13 +5,10 @@
 //
 
 
-#import <Foundation/Foundation.h>
+
+#import "CommentReplacer.h"
 
 
-@interface AutoLayoutCommentProcessor : NSObject
+@interface AutoLayoutCommentProcessor : NSObject <CommentParser>
 
-- (instancetype)initWithComment:(NSString *)comment;
-- (NSString *)process;
-
-- (NSString *)code;
 @end

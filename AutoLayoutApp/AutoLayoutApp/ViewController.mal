@@ -24,7 +24,7 @@
     [self.view addSubview:b];
     
     /*[LayoutConstraints]
-     a.left = b.right;
+     a.left == b.right
      a.width = 200;
      b.height = 32;
      */

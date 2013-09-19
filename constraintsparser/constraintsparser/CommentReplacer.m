@@ -9,6 +9,7 @@
 #import "CommentReplacer.h"
 
 #import "Logging.h"
+#import "AutoLayoutCommentProcessor.h"
 
 
 
@@ -25,6 +26,7 @@
 
 @property (nonatomic, strong) NSURL *fileURL;
 @property (nonatomic) NSUInteger lineNumber;
+@property (nonatomic) NSUInteger startLine;
 
 @end
 
@@ -37,6 +39,7 @@
     CommentReplacer *replacer = [[self alloc] init];
     replacer.lineControlUsesFullPath = YES;
     replacer.fileURL = fileURL;
+    replacer.commentParser = [[AutoLayoutCommentProcessor alloc] init];
     return replacer;
 }
 
@@ -70,7 +73,7 @@
     self.lineNumber = 0;
     
     BOOL needsToOutputLineNumber = YES;
-    NSUInteger startLine = 0;
+    self.startLine = 0;
     
     NSCharacterSet *newlineSet = [NSCharacterSet newlineCharacterSet];
     
@@ -85,20 +88,22 @@
                 [lines addObject:[self preprocessorCommentForCurrentLine]];
             }
             
-            if (startLine == 0) {
+            if (self.startLine == 0) {
                 NSRange range = [line rangeOfString:self.startMarker options:0];
                 if (range.length != 0) {
-                    startLine = self.lineNumber;
+                    self.startLine = self.lineNumber;
                     if (0 < range.location) {
                         [lines addObject:[line substringToIndex:range.location]];
                     }
                     if (NSMaxRange(range) < [line length]) {
                         [commentLines addObject:[line substringFromIndex:NSMaxRange(range)]];
+                    } else {
+                        [commentLines addObject:@""];
                     }
                 } else {
                     [lines addObject:line];
                 }
-            } else if (startLine != self.lineNumber) {
+            } else if (self.startLine != self.lineNumber) {
                 NSRange range = [line rangeOfString:self.endMarker options:0];
                 if (range.length != 0) {
                     if (0 < range.location) {
@@ -107,7 +112,7 @@
                     [lines addObjectsFromArray:[self processCommentLines:commentLines]];
                     [commentLines removeAllObjects];
                     needsToOutputLineNumber = YES;
-                    startLine = 0;
+                    self.startLine = 0;
                 } else {
                     [commentLines addObject:line];
                 }
@@ -161,7 +166,7 @@
 
 - (void)logErrorString:(NSString *)errorString forLineAtIndex:(NSUInteger)relativeLineIndex;
 {
-    PrintToStdErr(@"%@:%lu: error: %@", [self.fileURL path], self.lineNumber + relativeLineIndex, errorString);
+    PrintToStdErr(@"%@:%lu: error: %@", [self.fileURL path], self.startLine + relativeLineIndex, errorString);
 }
 
 @end

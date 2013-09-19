@@ -80,4 +80,11 @@
     XCTAssertNotNil(error, @"Should have an error");
 }
 
+- (void)testTokenizeError {
+    NSError* error;
+    id result = [self.parser parse:@";" error:&error];
+    XCTAssertNil(result, @"Should have no result");
+    XCTAssertNotNil(error, @"Should have an error");
+}
+
 @end

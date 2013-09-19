@@ -10,6 +10,8 @@
 #import "Tokenizer.h"
 #import "LayoutConstraint.h"
 
+#define RETURN_NIL_IF_ERROR if (error && *error) return nil;
+
 @interface Parser ()
 
 @property (nonatomic, strong) NSArray* tokens;
@@ -41,13 +43,13 @@
     return self;
 }
 
-#define fail(x) [NSError errorWithDomain:errorDomain code:NSURLErrorUnknown userInfo:@{NSLocalizedDescriptionKey : x}]
 
 - (LayoutConstraint*)parse:(NSString*)string error:(NSError**)error
 {
     NSError* theError;
     Tokenizer* tokenizer = [Tokenizer new];
-    self.tokens = [tokenizer tokenize:string];
+    self.tokens = [tokenizer tokenize:string error:error ];
+    RETURN_NIL_IF_ERROR
     self.cursor = 0;
     LayoutConstraint* constraint = [self parseEquation:&theError];
     if (theError) {
@@ -59,7 +61,6 @@
     return constraint;
 }
 
-#define RETURN_NIL_IF_ERROR if (error && *error) return nil;
 
 - (LayoutConstraint*)parseEquation:(NSError**)error
 {

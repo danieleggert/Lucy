@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1778B1A017EAF25600DE375B /* AutoLayoutCommentProcessorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1778B19F17EAF25600DE375B /* AutoLayoutCommentProcessorTests.m */; };
+		1778B1A017EAF25600DE375B /* ConstraintFormulaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1778B19F17EAF25600DE375B /* ConstraintFormulaTests.m */; };
 		1778B1A317EAF6F500DE375B /* ConstraintFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = D2589C92C1B754BF3F41BA92 /* ConstraintFormula.m */; };
 		1778B1A417EAF6F800DE375B /* AutoLayoutCommentProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = D25892C8F632016E5138522E /* AutoLayoutCommentProcessor.m */; };
 		3EF5964517EAEB4E002C42A2 /* CommentReplacer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF5964417EAEB4E002C42A2 /* CommentReplacer.m */; };
@@ -80,7 +80,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1778B19F17EAF25600DE375B /* AutoLayoutCommentProcessorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoLayoutCommentProcessorTests.m; sourceTree = "<group>"; };
+		1778B19F17EAF25600DE375B /* ConstraintFormulaTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstraintFormulaTests.m; sourceTree = "<group>"; };
 		3EF5964317EAEB4E002C42A2 /* CommentReplacer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentReplacer.h; sourceTree = "<group>"; };
 		3EF5964417EAEB4E002C42A2 /* CommentReplacer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentReplacer.m; sourceTree = "<group>"; };
 		3EF5964717EAEC2A002C42A2 /* TestFile.mal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestFile.mal; sourceTree = "<group>"; };
@@ -212,7 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				3EFC97BC17EA05FC00AFB5B2 /* CommentReplacerTests.m */,
-				1778B19F17EAF25600DE375B /* AutoLayoutCommentProcessorTests.m */,
+				1778B19F17EAF25600DE375B /* ConstraintFormulaTests.m */,
 				83996CF617EAF1B40060CAD8 /* ParserTests.m */,
 				3EF5964717EAEC2A002C42A2 /* TestFile.mal */,
 				3EF5965917EAEF16002C42A2 /* TestFile-output.mal */,
@@ -360,7 +360,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1778B1A017EAF25600DE375B /* AutoLayoutCommentProcessorTests.m in Sources */,
+				1778B1A017EAF25600DE375B /* ConstraintFormulaTests.m in Sources */,
 				1778B1A317EAF6F500DE375B /* ConstraintFormula.m in Sources */,
 				83996CFA17EAF27B0060CAD8 /* LayoutConstraint.m in Sources */,
 				83996CF817EAF2600060CAD8 /* Parser.m in Sources */,

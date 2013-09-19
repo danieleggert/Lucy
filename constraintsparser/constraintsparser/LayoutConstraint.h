@@ -8,10 +8,10 @@
 @interface LayoutConstraint : NSObject
 
 
-@property (strong) id firstItem;
+@property (strong) NSArray* firstItem;
 @property (assign) NSLayoutAttribute firstAttribute;
 @property (assign) NSLayoutRelation relation;
-@property (strong) id secondItem;
+@property (strong) NSArray* secondItem;
 @property (assign) NSLayoutAttribute secondAttribute;
 @property (assign) CGFloat multiplier;
 @property (assign) CGFloat constant;

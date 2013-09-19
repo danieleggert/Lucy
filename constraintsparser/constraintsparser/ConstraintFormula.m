@@ -6,6 +6,8 @@
 
 
 #import "ConstraintFormula.h"
+#import "Parser.h"
+#import "LayoutConstraint.h"
 
 
 static int constraintCounter = 0;
@@ -29,11 +31,13 @@ static int constraintCounter = 0;
 
 - (void)parse
 {
-    self.view1 = @"view1";
-    self.view2 = @"view2";
-    self.multiplier = 1;
-    self.constant = 0;
-    self.priority = 1000;
+    Parser* parser = [Parser new];
+    LayoutConstraint* constraint = [parser parse:self.formula];
+    self.view1 = [constraint.firstItem componentsJoinedByString:@"."];
+    self.view2 = [constraint.secondItem componentsJoinedByString:@"."];
+    self.multiplier = constraint.multiplier;
+    self.constant = constraint.constant;
+    self.priority = 1000; // todo
 }
 
 - (NSString *)layoutConstraintCodeForSuperview:(NSString *)superview

@@ -42,7 +42,7 @@
 }
 
 
-- (id)parse:(NSString*)string
+- (LayoutConstraint*)parse:(NSString*)string
 {
     Tokenizer* tokenizer = [Tokenizer new];
     self.tokens = [tokenizer tokenize:string];

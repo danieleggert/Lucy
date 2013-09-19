@@ -41,7 +41,7 @@
     XCTAssertNotNil(replacer, @"");
     
     OCMockObject *mock = [OCMockObject mockForProtocol:@protocol(CommentParser)];
-    [[[mock expect] andReturn:@[@"Replaced A", @"Replaced B"]] processedLinesFromLines:@[@"Original A", @"Original B", @"Original C"]];
+    [[[mock expect] andReturn:@[@"Replaced A", @"Replaced B"]] processedLinesFromLines:@[@"Original A", @"Original B", @"Original C"] errorHandler:(id) replacer];
     replacer.commentParser = (id) mock;
     
     NSData *output = [replacer processedFileData];

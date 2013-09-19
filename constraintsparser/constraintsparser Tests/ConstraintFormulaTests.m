@@ -36,8 +36,8 @@
     formula.attribute1 = 1;
     formula.attribute2 = 1;
     formula.multiplier = 2.3;
-    NSString *expectedOutput = @"self.one.two.translatesAutoResizingMaskIntoConstraints = NO;\n"
-        "test.translatesAutoResizingMaskIntoConstraints = NO;\n"
+    NSString *expectedOutput = @"self.one.two.translatesAutoresizingMaskIntoConstraints = NO;\n"
+        "test.translatesAutoresizingMaskIntoConstraints = NO;\n"
         "NSLayoutConstraint *objcio__constraint1 = [NSLayoutConstraint constraintWithItem:self.one.two attribute:1 relatedBy:0 toItem:test attribute:1 multiplier:2.300000 constant:0.000000];\n"
         "objcio__constraint1.priority = 1000;\n"
         "[self.view addConstraint:objcio__constraint1];";

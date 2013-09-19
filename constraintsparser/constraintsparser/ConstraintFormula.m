@@ -50,8 +50,8 @@ static int constraintCounter = 0;
     constraintCounter++;
     NSString *constraintIdentifier = [NSString stringWithFormat:@"objcio__constraint%d", constraintCounter];
     NSMutableArray *lines = [@[
-        [NSString stringWithFormat:@"%@.translatesAutoResizingMaskIntoConstraints = NO;", self.view1],
-        [NSString stringWithFormat:@"%@.translatesAutoResizingMaskIntoConstraints = NO;", self.view2],
+        [NSString stringWithFormat:@"%@.translatesAutoresizingMaskIntoConstraints = NO;", self.view1],
+        [NSString stringWithFormat:@"%@.translatesAutoresizingMaskIntoConstraints = NO;", self.view2],
         [NSString stringWithFormat:@"NSLayoutConstraint *%@ = [NSLayoutConstraint "
                                        "constraintWithItem:%@ attribute:%li relatedBy:%li toItem:%@ attribute:%li multiplier:%f constant:%f];", constraintIdentifier, self.view1, self.attribute1, self.relation, self.view2, self.attribute2, self.multiplier, self.constant],
         [NSString stringWithFormat:@"%@.priority = %li;", constraintIdentifier, self.priority],

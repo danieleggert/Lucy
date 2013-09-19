@@ -7,7 +7,6 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "AutoLayoutCommentProcessor.h"
 
 
 @interface AutoLayoutCommentProcessorTests : XCTestCase
@@ -26,19 +25,6 @@
 {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
-}
-
-- (void)testCommentParsing
-{
-    NSString *comment = @"superview: self.view\n"
-        "a.width == b.width\n"
-        "b.top == c.top + 20 => self.testConstraint";
-    NSArray *lines = [comment componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-
-    AutoLayoutCommentProcessor *processor = [[AutoLayoutCommentProcessor alloc] init];
-    NSArray *output = [processor processedLinesFromLines:lines errorHandler:nil];
-    NSLog(@"%@", output);
-    XCTFail(@"");
 }
 
 @end

@@ -17,9 +17,10 @@ static NSString *const SuperViewPrefix = @"superview";
 
 @property (nonatomic) NSString *superviewIdentifier;
 @property (nonatomic, strong) NSMutableArray *formulas;
-@property (nonatomic, strong) id <LineErrorHandler> errorHandler;
+@property (nonatomic, strong) id <LineParserDelegate> errorHandler;
 
 @end
+
 
 
 @implementation AutoLayoutCommentProcessor {
@@ -37,7 +38,7 @@ static NSString *const SuperViewPrefix = @"superview";
 }
 
 
-- (NSArray *)processedLinesFromLines:(NSArray *)inputLines errorHandler:(id <LineErrorHandler>)errorHandler
+- (NSArray *)processedLinesFromLines:(NSArray *)inputLines errorHandler:(id <LineParserDelegate>)errorHandler
 {
     self.errorHandler = errorHandler;
     [inputLines enumerateObjectsUsingBlock:^(NSString *line, NSUInteger idx, BOOL *stop) {
@@ -99,14 +100,14 @@ static NSString *const SuperViewPrefix = @"superview";
         NSString *value = [line substringWithRange:[result rangeAtIndex:2]];
         [self setConfigurationValue:value forKey:key error:&error];
     } else {
-        [self addFormulaForLine:line error:&error];
+        [self addFormulaForLine:line index:idx error:&error];
     }
     if (error) {
         [self.errorHandler logErrorString:error.userInfo[NSLocalizedDescriptionKey] forLineAtIndex:idx];
     }
 }
 
-- (void)addFormulaForLine:(NSString *)line error:(NSError **)error
+- (void)addFormulaForLine:(NSString *)line index:(NSUInteger)idx error:(NSError **)error
 {
     ConstraintFormula *constraintFormula = [[ConstraintFormula alloc] initWithLine:line];
     NSError *parseError;
@@ -114,6 +115,7 @@ static NSString *const SuperViewPrefix = @"superview";
     if (parseError) {
         *error = parseError;
     } else {
+        constraintFormula.fileAndLineDescription = [self.errorHandler fileAndLineDescriptinForLineAtIndex:idx];
         [self.formulas addObject:constraintFormula];
     }
 }

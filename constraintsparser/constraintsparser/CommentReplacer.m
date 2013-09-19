@@ -22,7 +22,7 @@
 //
 
 
-@interface CommentReplacer () <LineErrorHandler>
+@interface CommentReplacer () <LineParserDelegate>
 
 @property (nonatomic, strong) NSURL *fileURL;
 @property (nonatomic, strong) NSURL *outputFileURL;
@@ -181,6 +181,11 @@
 - (void)logErrorString:(NSString *)errorString forLineAtIndex:(NSUInteger)relativeLineIndex;
 {
     PrintToStdErr(@"%@:%lu: error: %@", [self.fileURL path], self.startLine + relativeLineIndex, errorString);
+}
+
+- (NSString *)fileAndLineDescriptinForLineAtIndex:(NSUInteger)relativeLineIndex;
+{
+    return [NSString stringWithFormat:@"%@:%lu", [self.fileURL path], self.startLine + relativeLineIndex];
 }
 
 @end

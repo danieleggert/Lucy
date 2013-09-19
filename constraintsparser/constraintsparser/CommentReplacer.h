@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol CommentParser;
-@protocol LineErrorHandler;
+@protocol LineParserDelegate;
 
 
 
@@ -27,14 +27,16 @@
 
 @protocol CommentParser <NSObject>
 
-- (NSArray *)processedLinesFromLines:(NSArray *)inputLines errorHandler:(id<LineErrorHandler>)errorHandler;
+- (NSArray *)processedLinesFromLines:(NSArray *)inputLines errorHandler:(id<LineParserDelegate>)errorHandler;
 
 @end
 
 
 
-@protocol LineErrorHandler <NSObject>
+@protocol LineParserDelegate <NSObject>
 
 - (void)logErrorString:(NSString *)errorString forLineAtIndex:(NSUInteger)relativeLineIndex;
+
+- (NSString *)fileAndLineDescriptinForLineAtIndex:(NSUInteger)relativeLineIndex;
 
 @end

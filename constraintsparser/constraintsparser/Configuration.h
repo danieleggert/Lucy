@@ -12,8 +12,8 @@
 
 @interface Configuration : NSObject
 
-+ (void)isDebugBuild;
++ (BOOL)isDebugBuild;
 
-+ (void)shouldAddDebugInfo;
++ (BOOL)shouldAddDebugInfo;
 
 @end

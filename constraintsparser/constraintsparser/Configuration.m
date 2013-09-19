@@ -12,12 +12,12 @@
 
 @implementation Configuration
 
-+ (void)isDebugBuild;
++ (BOOL)isDebugBuild;
 {
     return [[[NSProcessInfo processInfo] environment][@"CONFIGURATION"] hasPrefix:@"Debug"];
 }
 
-+ (void)shouldAddDebugInfo;
++ (BOOL)shouldAddDebugInfo;
 {
     return [[[NSProcessInfo processInfo] environment][@"COPY_PHASE_STRIP"] hasPrefix:@"NO"];
 }

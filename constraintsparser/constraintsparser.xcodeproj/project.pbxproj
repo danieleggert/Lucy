@@ -11,6 +11,7 @@
 		1778B1A317EAF6F500DE375B /* ConstraintFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = D2589C92C1B754BF3F41BA92 /* ConstraintFormula.m */; };
 		1778B1A417EAF6F800DE375B /* AutoLayoutCommentProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = D25892C8F632016E5138522E /* AutoLayoutCommentProcessor.m */; };
 		3E98964517EB309D007065BD /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98964417EB309D007065BD /* Configuration.m */; };
+		3E98964917EB322D007065BD /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98964417EB309D007065BD /* Configuration.m */; };
 		3EF5964517EAEB4E002C42A2 /* CommentReplacer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF5964417EAEB4E002C42A2 /* CommentReplacer.m */; };
 		3EF5964617EAEB4E002C42A2 /* CommentReplacer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF5964417EAEB4E002C42A2 /* CommentReplacer.m */; };
 		3EF5964817EAEC2A002C42A2 /* TestFile.mal in Resources */ = {isa = PBXBuildFile; fileRef = 3EF5964717EAEC2A002C42A2 /* TestFile.mal */; };
@@ -379,6 +380,7 @@
 				3EF5964617EAEB4E002C42A2 /* CommentReplacer.m in Sources */,
 				3EF596A517EB0047002C42A2 /* Logging.m in Sources */,
 				1778B1A417EAF6F800DE375B /* AutoLayoutCommentProcessor.m in Sources */,
+				3E98964917EB322D007065BD /* Configuration.m in Sources */,
 				D25896A65BF92F945545979B /* AutoLayoutCommentProcessorTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

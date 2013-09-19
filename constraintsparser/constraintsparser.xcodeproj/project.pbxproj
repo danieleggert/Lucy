@@ -21,6 +21,10 @@
 		83996CEF17EAF0F60060CAD8 /* Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 83996CEA17EAF0F60060CAD8 /* Parser.m */; };
 		83996CF017EAF0F60060CAD8 /* Tokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 83996CEB17EAF0F60060CAD8 /* Tokenizer.m */; };
 		83996CF117EAF0F60060CAD8 /* LayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 83996CED17EAF0F60060CAD8 /* LayoutConstraint.m */; };
+		83996CF717EAF1B40060CAD8 /* ParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83996CF617EAF1B40060CAD8 /* ParserTests.m */; };
+		83996CF817EAF2600060CAD8 /* Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 83996CEA17EAF0F60060CAD8 /* Parser.m */; };
+		83996CF917EAF2640060CAD8 /* Tokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 83996CEB17EAF0F60060CAD8 /* Tokenizer.m */; };
+		83996CFA17EAF27B0060CAD8 /* LayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 83996CED17EAF0F60060CAD8 /* LayoutConstraint.m */; };
 		D25894E64BCD432F1715BCF7 /* AutoLayoutCommentProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = D25892C8F632016E5138522E /* AutoLayoutCommentProcessor.m */; };
 		D258991FB1BF210D5FF00169 /* ConstraintFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = D2589C92C1B754BF3F41BA92 /* ConstraintFormula.m */; };
 /* End PBXBuildFile section */
@@ -92,6 +96,7 @@
 		83996CEC17EAF0F60060CAD8 /* Tokenizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tokenizer.h; sourceTree = "<group>"; };
 		83996CED17EAF0F60060CAD8 /* LayoutConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutConstraint.m; sourceTree = "<group>"; };
 		83996CEE17EAF0F60060CAD8 /* LayoutConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayoutConstraint.h; sourceTree = "<group>"; };
+		83996CF617EAF1B40060CAD8 /* ParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParserTests.m; sourceTree = "<group>"; };
 		D25892C8F632016E5138522E /* AutoLayoutCommentProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoLayoutCommentProcessor.m; sourceTree = "<group>"; };
 		D25899A78669FF84196407A7 /* AutoLayoutCommentProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoLayoutCommentProcessor.h; sourceTree = "<group>"; };
 		D2589AB358D6581191AE03E6 /* ConstraintFormula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstraintFormula.h; sourceTree = "<group>"; };
@@ -195,6 +200,7 @@
 				3EF5964717EAEC2A002C42A2 /* TestFile.mal */,
 				3EF5965917EAEF16002C42A2 /* TestFile-output.mal */,
 				3EFC97B717EA05FC00AFB5B2 /* Supporting Files */,
+				83996CF617EAF1B40060CAD8 /* ParserTests.m */,
 			);
 			path = "constraintsparser Tests";
 			sourceTree = "<group>";
@@ -336,7 +342,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83996CFA17EAF27B0060CAD8 /* LayoutConstraint.m in Sources */,
+				83996CF817EAF2600060CAD8 /* Parser.m in Sources */,
 				3EFC97BD17EA05FC00AFB5B2 /* CommentReplacerTests.m in Sources */,
+				83996CF717EAF1B40060CAD8 /* ParserTests.m in Sources */,
+				83996CF917EAF2640060CAD8 /* Tokenizer.m in Sources */,
 				3EF5964617EAEB4E002C42A2 /* CommentReplacer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

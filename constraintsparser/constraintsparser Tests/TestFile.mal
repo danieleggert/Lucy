@@ -1,14 +1,41 @@
-1
-2
-3
-4
-/*[LayoutConstraints]
-Original A
-Original B
-Original C
-*/
-5
-6
-7
-8
-9
+//
+//  ViewController.m
+//  AutoLayoutApp
+//
+//  Created by Daniel Eggert on 19/09/13.
+//  Copyright (c) 2013 objc.io. All rights reserved.
+//
+
+#import "ViewController.h"
+
+@interface ViewController ()
+
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	
+    UIView *a = [[UIView alloc] init];
+    [self.view addSubview:a];
+    UIView *b = [[UIView alloc] init];
+    [self.view addSubview:b];
+    
+    /*[LayoutConstraints]
+     a.left = b.right;
+     a.width = 200;
+     b.height = 32;
+     */
+    
+    NSLog(@"a");
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+@end

@@ -56,6 +56,7 @@ static NSString *const SuperViewPrefix = @"superview";
 
 - (void)processLine:(NSString *)line index:(NSUInteger)idx
 {
+    line = [line stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if (!line.length) return;
 
     NSRegularExpression *expression = [NSRegularExpression regularExpressionWithPattern:@"^\\s*(\\w+):\\s*(.+)\\s*$" options:NSRegularExpressionCaseInsensitive error:NULL];

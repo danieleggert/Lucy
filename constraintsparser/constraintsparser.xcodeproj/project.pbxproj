@@ -26,6 +26,8 @@
 		3EFC97B517EA05FC00AFB5B2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EFC97B417EA05FC00AFB5B2 /* XCTest.framework */; };
 		3EFC97BB17EA05FC00AFB5B2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC97B917EA05FC00AFB5B2 /* InfoPlist.strings */; };
 		3EFC97BD17EA05FC00AFB5B2 /* CommentReplacerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC97BC17EA05FC00AFB5B2 /* CommentReplacerTests.m */; };
+		5A4163E5822819C5E5CC940C /* Expression.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A416DECBA046347F063713C /* Expression.m */; };
+		8344F4C617EB47D1009EA9D7 /* Expression.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A416DECBA046347F063713C /* Expression.m */; };
 		83996CEF17EAF0F60060CAD8 /* Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 83996CEA17EAF0F60060CAD8 /* Parser.m */; };
 		83996CF017EAF0F60060CAD8 /* Tokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 83996CEB17EAF0F60060CAD8 /* Tokenizer.m */; };
 		83996CF117EAF0F60060CAD8 /* LayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 83996CED17EAF0F60060CAD8 /* LayoutConstraint.m */; };
@@ -106,6 +108,8 @@
 		3EFC97BA17EA05FC00AFB5B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3EFC97BC17EA05FC00AFB5B2 /* CommentReplacerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentReplacerTests.m; sourceTree = "<group>"; };
 		3EFC97BE17EA05FC00AFB5B2 /* constraintsparser Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "constraintsparser Tests-Prefix.pch"; sourceTree = "<group>"; };
+		5A416A60FCD15F60197F5A9A /* Expression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Expression.h; sourceTree = "<group>"; };
+		5A416DECBA046347F063713C /* Expression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Expression.m; sourceTree = "<group>"; };
 		83996CE917EAF0F60060CAD8 /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parser.h; sourceTree = "<group>"; };
 		83996CEA17EAF0F60060CAD8 /* Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Parser.m; sourceTree = "<group>"; };
 		83996CEB17EAF0F60060CAD8 /* Tokenizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tokenizer.m; sourceTree = "<group>"; };
@@ -204,6 +208,8 @@
 				D2589AB358D6581191AE03E6 /* ConstraintFormula.h */,
 				D2589C92C1B754BF3F41BA92 /* ConstraintFormula.m */,
 				3EFC97A617EA05D500AFB5B2 /* Supporting Files */,
+				5A416DECBA046347F063713C /* Expression.m */,
+				5A416A60FCD15F60197F5A9A /* Expression.h */,
 			);
 			path = constraintsparser;
 			sourceTree = "<group>";
@@ -363,6 +369,7 @@
 				83996CF117EAF0F60060CAD8 /* LayoutConstraint.m in Sources */,
 				3EF5966417EAF9AD002C42A2 /* ConstrainsParser.m in Sources */,
 				83996CEF17EAF0F60060CAD8 /* Parser.m in Sources */,
+				5A4163E5822819C5E5CC940C /* Expression.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +379,7 @@
 			files = (
 				1778B1A017EAF25600DE375B /* ConstraintFormulaTests.m in Sources */,
 				1778B1A317EAF6F500DE375B /* ConstraintFormula.m in Sources */,
+				8344F4C617EB47D1009EA9D7 /* Expression.m in Sources */,
 				83996CFA17EAF27B0060CAD8 /* LayoutConstraint.m in Sources */,
 				83996CF817EAF2600060CAD8 /* Parser.m in Sources */,
 				3EFC97BD17EA05FC00AFB5B2 /* CommentReplacerTests.m in Sources */,

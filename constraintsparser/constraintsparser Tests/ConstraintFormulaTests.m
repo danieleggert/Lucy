@@ -27,61 +27,23 @@
     [super tearDown];
 }
 
-- (void)testWidthAsConstant
+- (void)testParseComment
 {
-    NSString *formulaString = @"a.width == 200";
-    ConstraintFormula *formula = [[ConstraintFormula alloc] initWithLine:formulaString];
-    [formula parse:NULL];
-    NSString *expectedOutput = [self expectedOutputForItem:@"a" attribute:@"NSLayoutAttributeWidth" relation:@"NSLayoutRelationEqual" item:@"nil" attribute:@"NSLayoutAttributeNotAnAttribute" multiplier:1 constant:200 identifier:formula.identifier priority:1000];
-    XCTAssertEqualObjects(formula.layoutConstraintCode, expectedOutput, @"Should match");
-}
-
-- (void)testWidthWithPriority
-{
-    NSString *formulaString = @"a.width == 200 @500";
-    ConstraintFormula *formula = [[ConstraintFormula alloc] initWithLine:formulaString];
-    [formula parse:NULL];
-    NSString *expectedOutput = [self expectedOutputForItem:@"a" attribute:@"NSLayoutAttributeWidth" relation:@"NSLayoutRelationEqual" item:@"nil" attribute:@"NSLayoutAttributeNotAnAttribute" multiplier:1 constant:200 identifier:formula.identifier priority:500];
-    XCTAssertEqualObjects(formula.layoutConstraintCode, expectedOutput, @"Should match");
-}
-
-- (void)testWidthEqualToWidth
-{
-    NSString *formulaString = @"a.width == b.width";
-    ConstraintFormula *formula = [[ConstraintFormula alloc] initWithLine:formulaString];
-    [formula parse:NULL];
-    NSString *expectedOutput = [self expectedOutputForItem:@"a" attribute:@"NSLayoutAttributeWidth" relation:@"NSLayoutRelationEqual" item:@"b" attribute:@"NSLayoutAttributeWidth" multiplier:1 constant:0 identifier:formula.identifier priority:1000];
-    XCTAssertEqualObjects(formula.layoutConstraintCode, expectedOutput, @"Should match");
-}
-
-- (void)testWidthEqualToWidthWithMultiplierAndConstant
-{
-    NSString *formulaString = @"a.width == 200 + b.width * 10";
-    ConstraintFormula *formula = [[ConstraintFormula alloc] initWithLine:formulaString];
-    [formula parse:NULL];
-    NSString *expectedOutput = [self expectedOutputForItem:@"a" attribute:@"NSLayoutAttributeWidth" relation:@"NSLayoutRelationEqual" item:@"b" attribute:@"NSLayoutAttributeWidth" multiplier:10 constant:200 identifier:formula.identifier priority:1000];
-    XCTAssertEqualObjects(formula.layoutConstraintCode, expectedOutput, @"Should match");
-}
-
-- (void)testLeftToRightWithMultiplierConstantPriority
-{
-    NSString *formulaString = @"self.view.subview.left == 200 + self.view.subview2.right * 10@500";
-    ConstraintFormula *formula = [[ConstraintFormula alloc] initWithLine:formulaString];
-    [formula parse:NULL];
-    NSString *expectedOutput = [self expectedOutputForItem:@"self.view.subview" attribute:@"NSLayoutAttributeLeft" relation:@"NSLayoutRelationEqual" item:@"self.view.subview2" attribute:@"NSLayoutAttributeRight" multiplier:10 constant:200 identifier:formula.identifier priority:500];
-    XCTAssertEqualObjects(formula.layoutConstraintCode, expectedOutput, @"Should match");
-}
-
-- (NSString *)expectedOutputForItem:(NSString *)item1 attribute:(NSString *)attribute1 relation:(NSString *)relation item:(NSString *)item2 attribute:(NSString *)attribute2 multiplier:(CGFloat)multiplier constant:(CGFloat)constant identifier:(NSString *)identifier priority:(NSInteger)priority
-{
-    NSArray *lines = @[
-        [NSString stringWithFormat:@"NSLayoutConstraint *%@ = [NSLayoutConstraint constraintWithItem:%@ attribute:%@ relatedBy:%@ toItem:%@ attribute:%@ multiplier:%g constant:%g];",
-                identifier, item1, attribute1, relation, item2, attribute2, multiplier, constant],
-        [NSString stringWithFormat:@"%@.priority = %li;", identifier, priority]
-    ];
-    return [lines componentsJoinedByString:@"\n"];
+    ConstraintFormula *formula = [[ConstraintFormula alloc] initWithLine:nil];
+    formula.view1 = @"self.one.two";
+    formula.view2 = @"test";
+    formula.relation = 0;
+    formula.attribute1 = 1;
+    formula.attribute2 = 1;
+    formula.multiplier = @2.3;
+    NSString *expectedOutput = @"self.one.two.translatesAutoresizingMaskIntoConstraints = NO;\n"
+        "test.translatesAutoresizingMaskIntoConstraints = NO;\n"
+        "NSLayoutConstraint *objcio__constraint1 = [NSLayoutConstraint constraintWithItem:self.one.two attribute:1 relatedBy:0 toItem:test attribute:1 multiplier:2.300000 constant:0.000000];\n"
+        "objcio__constraint1.priority = 1000;\n"
+        "[self.view addConstraint:objcio__constraint1];";
+    NSString *output = [formula layoutConstraintCode];
+    NSLog(@"%@", output);
+    XCTAssert([output isEqualToString:expectedOutput], @"output does not match expected output");
 }
 
 @end
-
-

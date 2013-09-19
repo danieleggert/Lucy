@@ -220,7 +220,7 @@
 				ORGANIZATIONNAME = objc.io;
 				TargetAttributes = {
 					3EF596D317EB0159002C42A2 = {
-						TestTargetID = 3EF596B217EB0159002C42A2;
+						TestTargetID = 3EF596B217EB0159002C42A2 /* AutoLayoutApp */;
 					};
 				};
 			};

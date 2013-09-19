@@ -55,18 +55,18 @@ static int constraintCounter = 0;
     NSString *attribute1 = [self attributeIdentifierForAttribute:self.attribute1];
     NSString *attribute2 = [self attributeIdentifierForAttribute:self.attribute2];
     NSString *relation = [self relationIdentifierForRelation:self.relation];
-    NSArray *lines = @[
-        [NSString stringWithFormat:@"NSLayoutConstraint *%@ = [NSLayoutConstraint constraintWithItem:%@ attribute:%@ relatedBy:%@ toItem:%@ attribute:%@ multiplier:%@ constant:%@];",
-         self.identifier,
-         (self.view1 == nil) ? @"nil" : self.view1, attribute1, relation,
-         (self.view2 == nil) ? @"nil" : self.view2, attribute2, self.multiplier, self.constant],
-        [NSString stringWithFormat:@"%@.priority = %@;", self.identifier, self.priority],
-    ];
+    NSMutableArray *lines = [NSMutableArray array];
+    [lines addObject:[NSString stringWithFormat:
+                      @"NSLayoutConstraint *%@ = [NSLayoutConstraint constraintWithItem:%@ attribute:%@ relatedBy:%@ toItem:%@ attribute:%@ multiplier:%@ constant:%@];",
+                      self.identifier,
+                      (self.view1 == nil) ? @"nil" : self.view1, attribute1, relation,
+                      (self.view2 == nil) ? @"nil" : self.view2, attribute2, self.multiplier, self.constant]];
+    [lines addObject:[NSString stringWithFormat:@"%@.priority = %@;", self.identifier, self.priority]];
     if (self.targetIdentifier) {
-        lines = [lines arrayByAddingObject:[NSString stringWithFormat:@"%@ = %@;", self.targetIdentifier, self.identifier]];
+        [lines addObject:[NSString stringWithFormat:@"%@ = %@;", self.targetIdentifier, self.identifier]];
     }
     if ([Configuration shouldAddDebugInfo]) {
-        lines = [lines arrayByAddingObject:[self codeForAssociatingInputLineWithConstraintIdentifier:self.identifier]];
+        [lines addObjectsFromArray:[self codeForAssociatingInputLineWithConstraintIdentifier:self.identifier]];
     }
     return [lines componentsJoinedByString:@"\n"];
 }
@@ -132,11 +132,16 @@ static int constraintCounter = 0;
     return attributeIdentifier;
 }
 
-- (NSString *)codeForAssociatingInputLineWithConstraintIdentifier:(NSString *)constraintIdentifier;
+- (NSArray *)codeForAssociatingInputLineWithConstraintIdentifier:(NSString *)constraintIdentifier;
 {
     NSString *code = self.line;
     code = [code stringByReplacingOccurrencesOfString:@"\"" withString:@"'"];
-    return [NSString stringWithFormat:@"[%@ objcio_associateSourceCodeLine:@\"%@\"];", self.identifier, code];
+    id line1 = [NSString stringWithFormat:@"[%@ objcio_associateSourceCodeString:@\"%@\"];", self.identifier, code];
+    if (self.fileAndLineDescription == nil) {
+        return @[line1];
+    }
+    id line2 = [NSString stringWithFormat:@"[%@ objcio_associateSourceCodeFileAndLine:@\"%@\"];", self.identifier, self.fileAndLineDescription];
+    return @[line1, line2];
 }
 
 @end

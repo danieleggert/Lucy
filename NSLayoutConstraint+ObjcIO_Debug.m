@@ -11,7 +11,8 @@
 #import <objc/runtime.h>
 
 
-static int const SourceCodeKey;
+static int const SourceCodeStringKey;
+static int const SourceCodeFileAndLineKey;
 static void MethodSwizzle(Class c, SEL origSEL, SEL overrideSEL);
 
 
@@ -23,16 +24,26 @@ static void MethodSwizzle(Class c, SEL origSEL, SEL overrideSEL);
     MethodSwizzle(self, @selector(description), @selector(objcioOverride_description));
 }
 
-- (void)objcio_associateSourceCodeLine:(NSString *)sourceCode;
+- (void)objcio_associateSourceCodeString:(NSString *)sourceCode;
 {
-    objc_setAssociatedObject(self, &SourceCodeKey, sourceCode, OBJC_ASSOCIATION_COPY);
+    objc_setAssociatedObject(self, &SourceCodeStringKey, sourceCode, OBJC_ASSOCIATION_COPY);
+}
+
+- (void)objcio_associateSourceCodeFileAndLine:(NSString *)sourceCodeFileAndLine;
+{
+    objc_setAssociatedObject(self, &SourceCodeFileAndLineKey, sourceCodeFileAndLine, OBJC_ASSOCIATION_COPY);
+}
+
+- (NSString *)sourceCodeFileAndLine;
+{
+    return objc_getAssociatedObject(self, &SourceCodeFileAndLineKey);
 }
 
 - (NSString *)objcioOverride_description
 {
     // call through to the original, really
     NSString *description = [self objcioOverride_description];
-    NSString *sourceCode = objc_getAssociatedObject(self, &SourceCodeKey);
+    NSString *sourceCode = objc_getAssociatedObject(self, &SourceCodeStringKey);
     if (sourceCode == nil) {
         return description;
     }

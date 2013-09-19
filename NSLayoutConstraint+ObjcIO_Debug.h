@@ -12,6 +12,9 @@
 
 @interface NSLayoutConstraint (ObjcIO_Debug)
 
-- (void)objcio_associateSourceCodeLine:(NSString *)sourceCode;
+- (void)objcio_associateSourceCodeString:(NSString *)sourceCodeString;
+- (void)objcio_associateSourceCodeFileAndLine:(NSString *)sourceCodeFileAndLine;
+
+@property (readonly, nonatomic, copy) NSString *sourceCodeFileAndLine;
 
 @end

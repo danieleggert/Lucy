@@ -11,6 +11,7 @@
 @property (nonatomic, copy) NSString *identifier;
 @property (nonatomic, copy) NSString *targetIdentifier;
 @property (nonatomic, copy) NSString *line;
+@property (nonatomic, copy) NSString *fileAndLineDescription;
 @property (nonatomic, copy) NSString *view1;
 @property (nonatomic, copy) NSString *view2;
 @property (nonatomic) NSInteger attribute1;
